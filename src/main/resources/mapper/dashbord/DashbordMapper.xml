@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dunsum.backend.dashbord.dao.DashbordDao">
+
+    <select id="sel" parameterType="com.dunsum.backend.dashbord.model.DashbordSrchModel" resultType="Object">
+        SELECT * FROM JA_DUMY
+    </select>
+
+    <select id="getBool" resultType="Integer">
+        SELECT count(1) FROM JA_DUMY
+    </select>
+
+</mapper>

@@ -1,0 +1,15 @@
+server.port: 9090
+project.name: dunsum
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  datasource:
+    username: javayaji_a
+    password: javayajiA0820
+    url: jdbc:mysql://localhost:3306/javayaji_project_a?&serverTimezone=UTC&autoReconnect=true&allowMultiQueries=true&characterEncoding=UTF-8
+    driver: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:/mapper/**/*.xml
