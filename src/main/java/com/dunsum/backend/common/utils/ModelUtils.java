@@ -1,6 +1,6 @@
 package com.dunsum.backend.common.utils;
 
-import com.dunsum.backend.common.vo.AppDataSourceVO;
+import com.dunsum.backend.common.vo.environment.AppDataSourceVO;
 import com.dunsum.backend.common.vo.ColumnVO;
 import com.dunsum.backend.common.vo.TableVO;
 import lombok.RequiredArgsConstructor;

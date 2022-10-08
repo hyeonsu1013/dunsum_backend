@@ -13,3 +13,13 @@ spring:
 
 mybatis:
   mapper-locations: classpath:/mapper/**/*.xml
+
+api:
+  timeout: 60000
+
+outside:
+  connData:
+    dnf:
+      domain: https://api.neople.co.kr
+      key-name: apikey
+      key: Mn1vYhuBBf4xMmQhxaSQXPnp85SRzjbl

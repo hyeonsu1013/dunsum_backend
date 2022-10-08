@@ -1,5 +1,6 @@
 package com.dunsum.backend.admin.controller;
 
+import com.dunsum.backend.common.apis.DnfApis;
 import com.dunsum.backend.common.utils.ModelUtils;
 import com.dunsum.backend.common.vo.BaseVO;
 import io.swagger.annotations.Api;
@@ -18,10 +19,18 @@ public class AdminMgmtController {
 
     private final ModelUtils modelUtils;
 
+    private final DnfApis dnfApis;
+
     @ApiOperation(value = "Mapper 테스트", notes = "")
     @RequestMapping(value = "/ins/entt", method = RequestMethod.POST)
     public void insEntt(@RequestBody BaseVO baseVO) throws Exception {
         modelUtils.createEntity();
         System.out.println();
+    }
+
+    @ApiOperation(value = "test", notes = "")
+    @RequestMapping(value = "/test", method = RequestMethod.POST)
+    public void test() throws Exception {
+        dnfApis.call();
     }
 }

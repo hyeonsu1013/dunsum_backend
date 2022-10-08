@@ -1,4 +1,4 @@
-package com.dunsum.backend.common.vo;
+package com.dunsum.backend.common.vo.environment;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
