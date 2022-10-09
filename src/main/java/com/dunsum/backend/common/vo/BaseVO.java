@@ -21,4 +21,8 @@ public class BaseVO {
 
     @ApiModelProperty(value="수정일")
     private String mdftDate;
+
+    public boolean isEmpty() {
+        return true;
+    }
 }

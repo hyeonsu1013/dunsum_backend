@@ -1,6 +1,6 @@
 package com.dunsum.backend.admin.controller;
 
-import com.dunsum.backend.common.apis.DnfApis;
+import com.dunsum.backend.outside.dnf.service.DnfServiceImpl;
 import com.dunsum.backend.common.utils.ModelUtils;
 import com.dunsum.backend.common.vo.BaseVO;
 import io.swagger.annotations.Api;
@@ -19,7 +19,7 @@ public class AdminMgmtController {
 
     private final ModelUtils modelUtils;
 
-    private final DnfApis dnfApis;
+    private final DnfServiceImpl dnfApis;
 
     @ApiOperation(value = "Mapper 테스트", notes = "")
     @RequestMapping(value = "/ins/entt", method = RequestMethod.POST)

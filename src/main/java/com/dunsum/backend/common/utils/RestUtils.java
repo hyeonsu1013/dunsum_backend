@@ -79,12 +79,12 @@ public class RestUtils {
     }
 
     @SuppressWarnings({ "rawtypes"})
-    public Object sendPostApi(String uriAddr, Object params, Class clas) throws Exception {
+    public Object sendRestApi(String uriAddr, Object params, Class clas) throws Exception {
         return this.sendRestApi(uriAddr, params, clas, DEFAULT_METHOD, null, false);
     }
 
     @SuppressWarnings({ "rawtypes"})
-    public Object sendPostApi(String uriAddr, Object params, Class clas, HttpMethod httpMethod) throws Exception {
+    public Object sendRestApi(String uriAddr, Object params, Class clas, HttpMethod httpMethod) throws Exception {
         return this.sendRestApi(uriAddr, params, clas, httpMethod, null, false);
     }
 
@@ -119,7 +119,7 @@ public class RestUtils {
                     url = UriComponentsBuilder.fromUriString(url.toString() + "?" + params.toString())
                             .build().encode()
                             .toUri();
-                }else {
+                }else if(params != null){
                     MultiValueMap<String, String> paramMap = new LinkedMultiValueMap<>();
                     Map<String, String> map = om.convertValue(params, new TypeReference<Map<String, String>>() {});
                     paramMap.setAll(map);
