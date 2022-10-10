@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
-@ApiModel(description = "DUMY TABLE")
+@ApiModel(description = "")
 public class DumyEntity extends BaseVO {
 
     @ApiModelProperty(value = "")

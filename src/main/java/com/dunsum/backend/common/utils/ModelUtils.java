@@ -116,16 +116,18 @@ public class ModelUtils {
         List<String> importList = new ArrayList<>();
 
         List<ColumnVO> colList = tVO.getColList();
-
-        if(this.chkColContain(colList, "TIMESTAMP_ID")){
-            importList.add("import java.sql.Timestamp;");
-        }
+        Optional<ColumnVO> timestampList = colList.stream().filter(e -> "datetime,timestamp".contains(e.getDataType())).findFirst();
+        boolean hasTimestamp = timestampList.isPresent();
 
         importList.add("import com.dunsum.backend.common.vo.BaseVO;");
         importList.add("import io.swagger.annotations.ApiModel;");
         importList.add("import io.swagger.annotations.ApiModelProperty;");
         importList.add("import lombok.Data;");
         importList.add("import lombok.EqualsAndHashCode;");
+
+        if(hasTimestamp){
+            importList.add("\r\nimport java.sql.Timestamp;");
+        }
 
         List<ColumnVO> sortColList = colList.stream()
                 .sorted((e1, e2) -> Integer.compare(Integer.parseInt(e1.getOrdinalPosition())
