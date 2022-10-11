@@ -1,6 +1,15 @@
-server.port: 9090
 project.name: dunsum
 
+mybatis:
+  mapper-locations: classpath:/mapper/**/*.xml
+
+api:
+  timeout: 60000
+
+# TODO local, dev(real) 분리
+spring.profiles: local
+
+server.port: 9090
 spring:
   mvc:
     pathmatch:
@@ -11,15 +20,21 @@ spring:
     url: jdbc:mysql://localhost:3306/javayaji_project_a?&serverTimezone=UTC&autoReconnect=true&allowMultiQueries=true&characterEncoding=UTF-8
     driver: com.mysql.cj.jdbc.Driver
 
-mybatis:
-  mapper-locations: classpath:/mapper/**/*.xml
-
-api:
-  timeout: 60000
-
 outside:
   connData:
     dnf:
       domain: https://api.neople.co.kr
       key-name: apikey
       key: Mn1vYhuBBf4xMmQhxaSQXPnp85SRzjbl
+
+batch:
+  active.host : "127.0.0.1"
+  cronData:
+    delLog:
+      use: true
+      cron: "0 0 0 1 */3 *"
+      cron-chk: "0 10 0 1 */3 *"
+    dnfServer:
+      use : true
+      cron : "0 0 * * * *"
+      cron-chk : "0 5 * * * *"

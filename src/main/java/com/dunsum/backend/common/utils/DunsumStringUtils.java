@@ -10,6 +10,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class DunsumStringUtils {
 
+    public static boolean isBlank(String str) {
+        return str != null && !"".equals(str.trim());
+    }
+
     /**
      * 접두사 제거
      * @param str 변경대상
