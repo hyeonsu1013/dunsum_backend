@@ -28,10 +28,6 @@ public class RestUtils {
     @Value("${api.timeout}")
     private int apiTimeout;
 
-    public void setApiTimeOut(int timeoutMs) {
-        this.apiTimeout = timeoutMs;
-    }
-
     private HttpHeaders settingHeader() {
         return settingHeader(null);
     }

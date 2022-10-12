@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class DunsumStringUtils {
 
     public static boolean isBlank(String str) {
-        return str != null && !"".equals(str.trim());
+        return str == null || "".equals(str.trim());
     }
 
     /**

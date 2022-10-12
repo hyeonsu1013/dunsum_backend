@@ -3,13 +3,16 @@ project.name: dunsum
 mybatis:
   mapper-locations: classpath:/mapper/**/*.xml
 
+
+
+# TODO local, dev(real) 분리
+# spring.profiles: local
+
+server.port: 9090
+
 api:
   timeout: 60000
 
-# TODO local, dev(real) 분리
-spring.profiles: local
-
-server.port: 9090
 spring:
   mvc:
     pathmatch:
@@ -17,7 +20,7 @@ spring:
   datasource:
     username: javayaji_a
     password: javayajiA0820
-    url: jdbc:mysql://localhost:3306/javayaji_project_a?&serverTimezone=UTC&autoReconnect=true&allowMultiQueries=true&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/dunsum?&serverTimezone=UTC&autoReconnect=true&allowMultiQueries=true&characterEncoding=UTF-8
     driver: com.mysql.cj.jdbc.Driver
 
 outside:

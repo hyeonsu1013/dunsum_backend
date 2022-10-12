@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 @Data
 @EqualsAndHashCode(callSuper=false)
 @ApiModel(description = "배치로그관리")
-public class LogBachEntity extends BaseVO {
+public class BachLogEntity extends BaseVO {
 
     @ApiModelProperty(value = "LOG순번")
     private long bachSeq;
