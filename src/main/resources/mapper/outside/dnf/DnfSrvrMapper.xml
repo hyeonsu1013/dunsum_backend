@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dunsum.backend.outside.dnf.dao.DnfSrvrDao">
+
+    <insert id="insDnfSrvr" parameterType="java.util.List">
+        /* DnfSrvrDao.insDnfSrvr - javayaji */
+        INSERT INTO JV_DNF_SRVR (
+              SERVER_ID
+            , SERVER_NAME
+            , DB_STAT
+            , MDFT_DATE
+            , MDFT_USER_NO
+            , RGST_DATE
+            , RGST_USER_NO
+        )
+        VALUES
+        <foreach collection="list" item="item" separator=", ">
+            (
+              #{item.serverId}
+            , #{item.serverName}
+            , 'A'
+            , NOW()
+            , #{item.rgstUserNo}
+            , NOW()
+            , #{item.rgstUserNo}
+            )
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+          SERVER_NAME = VALUES(SERVER_NAME)
+        , DB_STAT = 'A'
+        , MDFT_DATE = VALUES(RGST_DATE)
+        , MDFT_USER_NO = VALUES(RGST_USER_NO)
+    </insert>
+
+    <update id="delLogicDnfSrvr" parameterType="com.dunsum.backend.outside.dnf.model.DnfSrvrModel">
+        UPDATE JV_DNF_SRVR DS
+           SET DS.DB_STAT = 'D'
+             , DS.MDFT_DATE = NOW()
+             , DS.MDFT_USER_NO = #{rgstUserNo}
+         WHERE DS.SERVER_ID NOT IN
+            <foreach collection="rows" item="item" open="(" close=")" separator=",">
+                #{item.serverId}
+            </foreach>
+    </update>
+
+
+</mapper>

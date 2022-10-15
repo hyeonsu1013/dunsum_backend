@@ -10,12 +10,13 @@ import java.util.Map;
  * Outside(otsd) 환경변수 VO
  * @author javayaji
  */
+
 @Data
 @Component
 @ConfigurationProperties("outside")
 public class AppOutsideVO {
 
-    Map<String, AppConnDataVO> connData;
+    private Map<String, AppConnDataVO> connData;
 
     public AppConnDataVO getConnData(String name) {
         return connData.get(name);

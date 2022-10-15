@@ -5,10 +5,14 @@ import com.dunsum.backend.batch.dao.BatchLogDao;
 import com.dunsum.backend.batch.enums.BatchMgmtFactory;
 import com.dunsum.backend.batch.model.BatchResultModel;
 import com.dunsum.backend.common.dto.SystemDTO;
+import com.dunsum.backend.common.utils.DunsumObjectUtils;
 import com.dunsum.backend.common.utils.DunsumStringUtils;
 import com.dunsum.backend.common.vo.environment.AppCronDataVO;
+import com.dunsum.backend.common.vo.environment.AppOutsideVO;
 import com.dunsum.backend.entity.BachLogEntity;
-import com.dunsum.backend.outside.dnf.service.DnfService;
+import com.dunsum.backend.outside.OutsideEnumFactory;
+import com.dunsum.backend.outside.dnf.model.DnfSrchModel;
+import com.dunsum.backend.outside.dnf.service.DnfSrvrService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Timestamp;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -34,9 +39,11 @@ public class BatchServiceImpl implements BatchService {
     private final BatchDao batchDao;
     private final BatchLogDao batchLogDao;
 
-    private final DnfService dnfService;
+    private final DnfSrvrService dnfService;
+    private final AppOutsideVO appOutsideVO;
 
-    private final String logFormat = "yyyyMMddHHmmss";
+    private final String DNF_CONN_DATA_NAME = OutsideEnumFactory.OutApisEnum.DNF.getName();
+
     private final long SYS_USER_NO = SystemDTO.SYS_USER_NO;
 
     /* -----------------------------------------------------------------------------------------------------------------------*/
@@ -75,7 +82,7 @@ public class BatchServiceImpl implements BatchService {
         long hours = (milliseconds / 1000) / 60 / 60;
         long minutes = (milliseconds / 1000) / 60 % 60;
         long seconds = (milliseconds / 1000) % 60;
-        return String.format("Running Time : %d ms = %d h %d m %d s", milliseconds, hours, minutes, seconds);
+        return String.format("%d ms = %d h %d m %d s", milliseconds, hours, minutes, seconds);
     }
 
     private BachLogEntity insBachLog(boolean isBatch, String msg, long stTime, String logMgmtSeq) throws Exception {
@@ -207,7 +214,13 @@ public class BatchServiceImpl implements BatchService {
 
     @Transactional(rollbackFor = Exception.class)
     private BatchResultModel dnfServer(boolean isBach) throws Exception {
-        String msg = "결과 글자 수 :: " + dnfService.selServers().length();
+        DnfSrchModel srchModel = new DnfSrchModel();
+        srchModel.setAppConnDataVO(this.appOutsideVO.getConnData(this.DNF_CONN_DATA_NAME));
+
+        Map<String, Object> rtnMap = dnfService.updServers(srchModel);
+        int insCnt = DunsumObjectUtils.convertInt(rtnMap.get("INS"));
+        int delCnt = DunsumObjectUtils.convertInt(rtnMap.get("DEL"));
+        String msg = String.format("서버 갯수 : %d, 삭제 갯수 : %d", insCnt, delCnt);
         return new BatchResultModel(BatchMgmtFactory.getSuccCode(), msg);
     }
 }
