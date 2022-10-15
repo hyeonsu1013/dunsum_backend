@@ -116,7 +116,12 @@ public class ModelUtils {
         List<String> importList = new ArrayList<>();
 
         List<ColumnVO> colList = tVO.getColList();
-        Optional<ColumnVO> timestampList = colList.stream().filter(e -> "datetime,timestamp".contains(e.getDataType())).findFirst();
+        Optional<ColumnVO> timestampList = colList.stream()
+                                            .filter(e ->
+                                                    "datetime,timestamp".contains(e.getDataType())
+                                                    && !Arrays.asList(baseColumns).contains(e.getColumnName())
+                                                    )
+                                            .findFirst();
         boolean hasTimestamp = timestampList.isPresent();
 
         importList.add("import com.dunsum.backend.common.vo.BaseVO;");

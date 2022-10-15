@@ -2,6 +2,8 @@ package com.dunsum.backend.common.utils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -22,6 +24,8 @@ import java.util.Set;
 
 @Component
 public class RestUtils {
+
+    public static final Logger restLogger = LoggerFactory.getLogger(RestUtils.class);
 
     final HttpMethod DEFAULT_METHOD = HttpMethod.POST;
 
@@ -75,20 +79,21 @@ public class RestUtils {
     }
 
     @SuppressWarnings({ "rawtypes"})
-    public Object sendRestApi(String uriAddr, Object params, Class clas) throws Exception {
+    public<T> T sendRestApi(String uriAddr, Object params, Class clas) throws Exception {
         return this.sendRestApi(uriAddr, params, clas, DEFAULT_METHOD, null, false);
     }
 
     @SuppressWarnings({ "rawtypes"})
-    public Object sendRestApi(String uriAddr, Object params, Class clas, HttpMethod httpMethod) throws Exception {
+    public<T> T sendRestApi(String uriAddr, Object params, Class clas, HttpMethod httpMethod) throws Exception {
         return this.sendRestApi(uriAddr, params, clas, httpMethod, null, false);
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    public Object sendRestApi(String uriAddr, Object params, Class clas, HttpMethod httpMethod, HttpHeaders headers, boolean isParam) throws Exception {
-        Object rtnObj = null;
-
-        StringBuilder log = new StringBuilder();
+    public<T> T sendRestApi(String uriAddr, Object params, Class clas, HttpMethod httpMethod, HttpHeaders headers, boolean isParam) throws Exception {
+        T rtn = null;
+        Object resRtn = null;
+        String resString = null;
+        ObjectMapper om = new ObjectMapper();
 
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
@@ -106,8 +111,6 @@ public class RestUtils {
             factory.setReadTimeout(apiTimeout);
 
             RestTemplate re = new RestTemplate(factory);
-            ObjectMapper om = new ObjectMapper();
-
             String strParam = "";
 
             if(HttpMethod.GET.equals(httpMethod)) {
@@ -142,34 +145,27 @@ public class RestUtils {
                 }
             }
 
-            System.out.println("req Url :: " + url);
-            System.out.println("strParam Url :: " + strParam);
-
             HttpEntity<String> request = new HttpEntity<String>(strParam, headers);
             re.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
-            ResponseEntity<Object> response = re.exchange(url, httpMethod, request, clas);
-            rtnObj = response.getBody();
+            ResponseEntity<T> response = re.exchange(url, httpMethod, request, clas);
+            rtn = response.getBody();
 
         } catch (Exception e) {
-
-            System.out.println("###### Exception ######");
-            System.out.println(e.getMessage());
-
+            restLogger.error("###### Exception ######\n{}", e.getMessage());
             throw e;
         } finally {
             stopWatch.stop();
-            System.out.println("- Response -\n");
+            restLogger.info("- Response -\n");
 
-            if(rtnObj != null) {
-                ObjectMapper om = new ObjectMapper();
-                String resString = om.writeValueAsString(rtnObj);
-                System.out.println(resString);
+            if(rtn != null) {
+                resString = om.writeValueAsString(rtn);
+                restLogger.info(resString);
             } else {
-                System.out.println("- Response is null !!!");
+                restLogger.info("- Response is null !!!");
             }
-
-            System.out.println("- TimeSeconds : "+stopWatch.getTotalTimeSeconds());
+            restLogger.info("- TimeSeconds : {}", stopWatch.getTotalTimeSeconds());
         }
-        return rtnObj;
+
+        return rtn;
     }
 }

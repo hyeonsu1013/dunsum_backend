@@ -2,6 +2,7 @@ package com.dunsum.backend.common.utils;
 
 import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 /**
  * Custom String Utils
@@ -38,5 +39,19 @@ public class DunsumStringUtils {
         return camelName;
     }
 
-
+    /**
+     * String이 숫자로 이루어졌는지 체크
+     * @param str 체크할 String
+     */
+    public static boolean isNumber(String str) {
+        if(str == null || str.length() == 0) {
+            return false;
+        }
+        for (int i = 0; i < str.length(); i++) {
+            if (!Character.isDigit(str.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

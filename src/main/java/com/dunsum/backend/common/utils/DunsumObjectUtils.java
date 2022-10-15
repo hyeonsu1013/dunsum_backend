@@ -78,4 +78,27 @@ public class DunsumObjectUtils {
             }
         }
     }
+
+    /**
+     * Object를 받아 int를 반환
+     * @param o 변환할 Object
+     */
+    public static int convertInt(Object o) throws  Exception {
+        if(o == null){
+            return 0;
+        }
+
+        if(o instanceof String){
+            String str = (String)o;
+            if(!DunsumStringUtils.isNumber(str)){
+                return 0;
+            }
+            return Integer.parseInt(str);
+        } else if (o instanceof Number) {
+            Number n = (Number) o;
+            return n.intValue();
+        }
+
+        return 0;
+    }
 }
