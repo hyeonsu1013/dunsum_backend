@@ -4,11 +4,11 @@
 <mapper namespace="com.dunsum.backend.dashbord.dao.DashbordDao">
 
     <select id="sel" parameterType="com.dunsum.backend.dashbord.model.DashbordSrchModel" resultType="Object">
-        SELECT * FROM JA_DUMY
+        SELECT * FROM JV_DUMY
     </select>
 
     <select id="getBool" resultType="Integer">
-        SELECT count(1) FROM JA_DUMY
+        SELECT count(1) FROM JV_DUMY
     </select>
 
 </mapper>

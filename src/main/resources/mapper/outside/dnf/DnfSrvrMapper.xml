@@ -9,6 +9,7 @@
              , SERVER_NAME
           FROM JV_DNF_SRVR
          WHERE DB_STAT = 'A'
+         ORDER BY PRNT_ODER
     </select>
 
     <insert id="insDnfSrvr" parameterType="java.util.List">
@@ -16,6 +17,7 @@
         INSERT INTO JV_DNF_SRVR (
               SERVER_ID
             , SERVER_NAME
+            , PRNT_ODER
             , DB_STAT
             , MDFT_DATE
             , MDFT_USER_NO
@@ -23,10 +25,11 @@
             , RGST_USER_NO
         )
         VALUES
-        <foreach collection="list" item="item" separator=", ">
+        <foreach collection="list" item="item" index="index" separator=", ">
             (
               #{item.serverId}
             , #{item.serverName}
+            , #{index}
             , 'A'
             , NOW()
             , #{item.rgstUserNo}
@@ -36,6 +39,7 @@
         </foreach>
         ON DUPLICATE KEY UPDATE
           SERVER_NAME = VALUES(SERVER_NAME)
+        , PRNT_ODER = VALUES(PRNT_ODER)
         , DB_STAT = 'A'
         , MDFT_DATE = VALUES(RGST_DATE)
         , MDFT_USER_NO = VALUES(RGST_USER_NO)
