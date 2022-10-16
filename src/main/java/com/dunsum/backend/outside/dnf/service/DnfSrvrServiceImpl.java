@@ -25,18 +25,36 @@ public class DnfSrvrServiceImpl implements DnfSrvrService {
 
     public static final Logger dnfLogger = LoggerFactory.getLogger(DnfSrvrService.class);
 
+    public static final String API = "API";
+    public static final String DATABASE = "Database";
+    public static final String REDIS = "Redis";
+
     // DI 대상
     private final RestUtils restUtils;
     private final DnfSrvrDao dnfSrvrDao;
 
     @Override
     public DnfSrvrModel selServers(DnfSrchModel srchModel) throws Exception {
-        DnfEnumsFactory.DnfApiEnums dae = DnfEnumsFactory.DnfApiEnums.SEL_SERVERS;
+        DnfSrvrModel srvrModel = null;
 
-        String url = DnfEnumsFactory.getApiUrl(srchModel.getAppConnDataVO(), dae);
-        Map<String, Object> params = DnfEnumsFactory.getApiParams(srchModel.getAppConnDataVO(), dae);
+        try {
+            DnfEnumsFactory.DnfApiEnums dae = DnfEnumsFactory.DnfApiEnums.SEL_SERVERS;
 
-        return restUtils.sendRestApi(url, params, DnfSrvrModel.class, dae.getHttpMethod());
+            String url = DnfEnumsFactory.getApiUrl(srchModel.getAppConnDataVO(), dae);
+            Map<String, Object> params = DnfEnumsFactory.getApiParams(srchModel.getAppConnDataVO(), dae);
+            srvrModel = restUtils.sendRestApi(url, params, DnfSrvrModel.class, dae.getHttpMethod());
+            srvrModel.setSelType(DnfEnumsFactory.getSelTypeCode(API));
+        }
+        // API 통신 실패 시 DB 조회
+        catch (Exception e) {
+            srvrModel = new DnfSrvrModel();
+            srvrModel.setFailRson(API + " :: " + e.getMessage());
+            srvrModel.setSelType(DATABASE);
+            srvrModel.setRows(dnfSrvrDao.selDnfSrvr());
+            // TOTO : 실패로그 기록
+        }
+
+        return srvrModel;
     }
 
     @Override

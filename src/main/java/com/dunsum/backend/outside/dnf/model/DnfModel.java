@@ -1,21 +1,21 @@
 package com.dunsum.backend.outside.dnf.model;
 
-import com.dunsum.backend.entity.DnfSrvrEntity;
+import com.dunsum.backend.common.vo.BaseVO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class DnfSrvrModel extends DnfModel {
+public class DnfModel extends BaseVO {
 
-    @ApiModelProperty(value="서버 목록")
-    List<DnfSrvrEntity> rows;
+    @ApiModelProperty(value="조회 타입")
+    String selType;
 
+    @ApiModelProperty(value="조회 실패 사유")
+    String failRson;
 }

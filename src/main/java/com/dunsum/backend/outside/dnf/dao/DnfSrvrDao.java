@@ -10,6 +10,11 @@ import java.util.List;
 public interface DnfSrvrDao {
 
     /**
+     *
+     */
+    List<DnfSrvrEntity> selDnfSrvr() throws Exception;
+
+    /**
      * 던파 서버 목록 저장
      */
     void insDnfSrvr(List<DnfSrvrEntity> list) throws Exception;
