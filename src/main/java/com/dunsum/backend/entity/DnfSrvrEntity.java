@@ -17,6 +17,9 @@ public class DnfSrvrEntity extends BaseVO {
     @ApiModelProperty(value = "서버명")
     private String serverName;
 
+    @ApiModelProperty(value = "정렬순서")
+    private int prntOder;
+
     @ApiModelProperty(value = "DB상태")
     private String dbStat;
 
