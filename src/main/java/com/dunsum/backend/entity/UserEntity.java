@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
-@ApiModel(description = "DNF 서버목록")
+@ApiModel(description = "사용자 테이블")
 public class UserEntity extends BaseVO {
 
     @ApiModelProperty(value = "사용인번호")
@@ -24,6 +24,9 @@ public class UserEntity extends BaseVO {
 
     @ApiModelProperty(value = "개인이메일")
     private String idvlEmal;
+
+    @ApiModelProperty(value = "게스트 여부")
+    private String gustYn;
 
     @ApiModelProperty(value = "성별")
     private String gndr;
