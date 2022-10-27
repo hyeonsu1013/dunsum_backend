@@ -1,6 +1,6 @@
-package com.dunsum.backend.common.common.utils;
+package com.dunsum.backend.common.utils;
 
-import com.dunsum.backend.common.common.vo.BaseVO;
+import com.dunsum.backend.common.vo.BaseVO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.math.BigDecimal;

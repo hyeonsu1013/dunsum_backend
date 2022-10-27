@@ -1,6 +1,6 @@
 package com.dunsum.backend.domains.account.service;
 
-import com.dunsum.backend.common.common.utils.RandomUtils;
+import com.dunsum.backend.common.utils.RandomUtils;
 import com.dunsum.backend.domains.account.dao.AcutMgmtDao;
 import com.dunsum.backend.domains.entity.UserEntity;
 import com.dunsum.backend.domains.entity.UserGustEntity;

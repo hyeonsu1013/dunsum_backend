@@ -1,8 +1,8 @@
-package com.dunsum.backend.common.common.utils;
+package com.dunsum.backend.common.utils;
 
-import com.dunsum.backend.common.common.vo.environment.AppDataSourceVO;
-import com.dunsum.backend.common.common.vo.ColumnVO;
-import com.dunsum.backend.common.common.vo.TableVO;
+import com.dunsum.backend.common.vo.environment.AppDataSourceVO;
+import com.dunsum.backend.common.vo.ColumnVO;
+import com.dunsum.backend.common.vo.TableVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -27,8 +27,8 @@ public class ModelUtils {
     private final AppDataSourceVO appDataSourceVO;
 
     private static final String dbSchema = "dunsum"; // DB 스키마
-    private static final String packagePath = "com.dunsum.backend.entity"; // 패키지 경로
-    private static final String filePath = "D:\\real_project\\dunsum\\backend\\src\\main\\java\\com\\dunsum\\backend\\entity\\"; // 파일 저장 경로
+    private static final String packagePath = "com.dunsum.backend.domains.entity"; // 패키지 경로
+    private static final String filePath = "D:\\real_project\\dunsum\\backend\\src\\main\\java\\com\\dunsum\\backend\\domains\\entity\\"; // 파일 저장 경로
     private static final String[] baseColumns = new String[]{"RGST_USER_NO", "MDFT_USER_NO", "RGST_DATE", "MDFT_DATE"};
 
     private static final String tablePrefix = "jv_";

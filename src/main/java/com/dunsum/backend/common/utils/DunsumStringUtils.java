@@ -1,4 +1,4 @@
-package com.dunsum.backend.common.common.utils;
+package com.dunsum.backend.common.utils;
 
 import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.stereotype.Component;

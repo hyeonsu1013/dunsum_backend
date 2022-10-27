@@ -1,4 +1,4 @@
-package com.dunsum.backend.common.common.config;
+package com.dunsum.backend.common.config;
 
 import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Bean;

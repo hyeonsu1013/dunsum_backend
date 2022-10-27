@@ -1,4 +1,4 @@
-package com.dunsum.backend.common.common.dto;
+package com.dunsum.backend.common.dto;
 
 /**
  * SYSTEM DTO

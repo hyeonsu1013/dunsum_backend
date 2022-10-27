@@ -1,4 +1,9 @@
 DUNSUM
+# 트리구조
+* backend (최상위 Directory)
+  * common (운영에 필요한 모든 기능 - Config, Utils 등)
+  * domains (domain 모음 - Controller, Service, Dao, Model 등)
+  * batch (batch 관련 모음)
 
 # 주요 기능
 * Batch Scheduler - Batch.java
@@ -11,6 +16,7 @@ DUNSUM
 * DunsumStringUtils
 * DunsumObjectUtils
 * DunsumUrlUtils
+* RandomUtils
 * ModelUtils
 * RestUtils
   * DnfApis

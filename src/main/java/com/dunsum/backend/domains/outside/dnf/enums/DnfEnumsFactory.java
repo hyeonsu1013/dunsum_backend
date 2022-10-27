@@ -1,8 +1,8 @@
 package com.dunsum.backend.domains.outside.dnf.enums;
 
-import com.dunsum.backend.common.common.utils.DunsumObjectUtils;
-import com.dunsum.backend.common.common.utils.DunsumUrlUtils;
-import com.dunsum.backend.common.common.vo.environment.AppConnDataVO;
+import com.dunsum.backend.common.utils.DunsumObjectUtils;
+import com.dunsum.backend.common.utils.DunsumUrlUtils;
+import com.dunsum.backend.common.vo.environment.AppConnDataVO;
 import com.dunsum.backend.domains.outside.OutsideEnumFactory;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

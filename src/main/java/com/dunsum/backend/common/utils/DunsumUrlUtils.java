@@ -1,4 +1,4 @@
-package com.dunsum.backend.common.common.utils;
+package com.dunsum.backend.common.utils;
 
 import java.util.HashMap;
 import java.util.Map;

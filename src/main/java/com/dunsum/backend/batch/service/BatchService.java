@@ -1,6 +1,6 @@
 package com.dunsum.backend.batch.service;
 
-import com.dunsum.backend.common.common.vo.environment.AppCronDataVO;
+import com.dunsum.backend.common.vo.environment.AppCronDataVO;
 
 public interface BatchService {
 

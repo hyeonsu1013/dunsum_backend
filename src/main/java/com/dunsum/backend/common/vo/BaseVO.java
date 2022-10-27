@@ -1,4 +1,4 @@
-package com.dunsum.backend.common.common.vo;
+package com.dunsum.backend.common.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;

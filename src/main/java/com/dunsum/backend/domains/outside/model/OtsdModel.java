@@ -1,7 +1,7 @@
 package com.dunsum.backend.domains.outside.model;
 
-import com.dunsum.backend.common.common.vo.BaseVO;
-import com.dunsum.backend.common.common.vo.environment.AppConnDataVO;
+import com.dunsum.backend.common.vo.BaseVO;
+import com.dunsum.backend.common.vo.environment.AppConnDataVO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;

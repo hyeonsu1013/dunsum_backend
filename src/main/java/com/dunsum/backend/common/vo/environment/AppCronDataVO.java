@@ -1,4 +1,4 @@
-package com.dunsum.backend.common.common.vo.environment;
+package com.dunsum.backend.common.vo.environment;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;

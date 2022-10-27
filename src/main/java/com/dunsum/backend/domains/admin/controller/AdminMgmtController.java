@@ -1,10 +1,10 @@
 package com.dunsum.backend.domains.admin.controller;
 
 import com.dunsum.backend.batch.Batch;
-import com.dunsum.backend.common.common.vo.environment.AppBatchVO;
+import com.dunsum.backend.common.vo.environment.AppBatchVO;
 import com.dunsum.backend.domains.outside.dnf.service.DnfSrvrServiceImpl;
-import com.dunsum.backend.common.common.utils.ModelUtils;
-import com.dunsum.backend.common.common.vo.BaseVO;
+import com.dunsum.backend.common.utils.ModelUtils;
+import com.dunsum.backend.common.vo.BaseVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;

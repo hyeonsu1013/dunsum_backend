@@ -1,4 +1,4 @@
-package com.dunsum.backend.common.common.utils;
+package com.dunsum.backend.common.utils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

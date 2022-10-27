@@ -1,6 +1,6 @@
 package com.dunsum.backend.domains.entity;
 
-import com.dunsum.backend.common.common.vo.BaseVO;
+import com.dunsum.backend.common.vo.BaseVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

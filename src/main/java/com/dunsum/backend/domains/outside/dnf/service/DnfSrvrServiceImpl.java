@@ -1,8 +1,8 @@
 package com.dunsum.backend.domains.outside.dnf.service;
 
-import com.dunsum.backend.common.common.dto.SystemDTO;
-import com.dunsum.backend.common.common.utils.DunsumObjectUtils;
-import com.dunsum.backend.common.common.utils.RestUtils;
+import com.dunsum.backend.common.dto.SystemDTO;
+import com.dunsum.backend.common.utils.DunsumObjectUtils;
+import com.dunsum.backend.common.utils.RestUtils;
 import com.dunsum.backend.domains.entity.DnfSrvrEntity;
 import com.dunsum.backend.domains.outside.dnf.dao.DnfSrvrDao;
 import com.dunsum.backend.domains.outside.dnf.enums.DnfEnumsFactory;

@@ -1,9 +1,9 @@
 package com.dunsum.backend.common.aspect;
 
-import com.dunsum.backend.common.common.dto.SystemDTO;
-import com.dunsum.backend.common.common.utils.DunsumStringUtils;
-import com.dunsum.backend.common.common.vo.BaseVO;
-import com.dunsum.backend.common.common.vo.environment.AppOutsideVO;
+import com.dunsum.backend.common.dto.SystemDTO;
+import com.dunsum.backend.common.utils.DunsumStringUtils;
+import com.dunsum.backend.common.vo.BaseVO;
+import com.dunsum.backend.common.vo.environment.AppOutsideVO;
 import com.dunsum.backend.domains.outside.model.OtsdModel;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.JoinPoint;
