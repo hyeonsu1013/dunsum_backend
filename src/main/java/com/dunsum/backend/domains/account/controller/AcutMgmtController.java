@@ -1,0 +1,27 @@
+package com.dunsum.backend.domains.account.controller;
+
+import com.dunsum.backend.domains.account.service.AcutMgmtService;
+import com.dunsum.backend.domains.entity.UserEntity;
+import com.dunsum.backend.domains.entity.UserGustEntity;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+@RequestMapping("/${project.name}/api/acut")
+@RestController
+@RequiredArgsConstructor
+@Api(value = "account Controller - Swagger", description = "계정관리 Controller 입니다.")
+public class AcutMgmtController {
+
+    private final AcutMgmtService acutMgmtService;
+
+    @ApiOperation(value = "Guest 로그인", notes = "")
+    @RequestMapping(value = "/ins/gust", method = RequestMethod.POST)
+    public UserEntity insGust(@RequestBody  UserGustEntity entt) throws Exception {
+        return acutMgmtService.insGust(entt);
+    }
+}

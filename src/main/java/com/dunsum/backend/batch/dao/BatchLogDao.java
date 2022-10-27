@@ -1,6 +1,6 @@
 package com.dunsum.backend.batch.dao;
 
-import com.dunsum.backend.entity.BachLogEntity;
+import com.dunsum.backend.domains.entity.BachLogEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

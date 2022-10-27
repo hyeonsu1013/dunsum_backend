@@ -3,7 +3,7 @@
 
 <mapper namespace="com.dunsum.backend.batch.dao.BatchLogDao">
 
-    <insert id="insBachLog" parameterType="com.dunsum.backend.entity.BachLogEntity" useGeneratedKeys="true" keyProperty="bachSeq">
+    <insert id="insBachLog" parameterType="com.dunsum.backend.domains.entity.BachLogEntity" useGeneratedKeys="true" keyProperty="bachSeq">
         /* BatchLogDao.insLogBatch - javayaji */
         INSERT INTO JV_BACH_LOG (
               BACH_MGMT_ID
@@ -31,7 +31,7 @@
         )
     </insert>
 
-    <update id="updBachLog" parameterType="com.dunsum.backend.entity.BachLogEntity">
+    <update id="updBachLog" parameterType="com.dunsum.backend.domains.entity.BachLogEntity">
         /* BatchLogDao.updBachLog - javayaji */
         UPDATE JV_BACH_LOG
            SET MSG = #{msg}

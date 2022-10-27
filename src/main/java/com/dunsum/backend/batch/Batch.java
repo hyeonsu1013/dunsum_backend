@@ -1,8 +1,8 @@
 package com.dunsum.backend.batch;
 
 import com.dunsum.backend.batch.service.BatchService;
-import com.dunsum.backend.common.vo.environment.AppBatchVO;
-import com.dunsum.backend.common.vo.environment.AppCronDataVO;
+import com.dunsum.backend.common.common.vo.environment.AppBatchVO;
+import com.dunsum.backend.common.common.vo.environment.AppCronDataVO;
 import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

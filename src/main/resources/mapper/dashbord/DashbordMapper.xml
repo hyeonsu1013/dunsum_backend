@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.dunsum.backend.dashbord.dao.DashbordDao">
+<mapper namespace="com.dunsum.backend.domains.dashbord.dao.DashbordDao">
 
-    <select id="sel" parameterType="com.dunsum.backend.dashbord.model.DashbordSrchModel" resultType="Object">
+    <select id="sel" parameterType="com.dunsum.backend.domains.dashbord.model.DashbordSrchModel" resultType="Object">
         SELECT * FROM JV_DUMY
     </select>
 
