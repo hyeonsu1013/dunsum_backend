@@ -2,7 +2,6 @@ package com.dunsum.backend.common.utils;
 
 import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 /**
  * Custom String Utils
@@ -13,6 +12,10 @@ public class DunsumStringUtils {
 
     public static boolean isBlank(String str) {
         return str == null || "".equals(str.trim());
+    }
+
+    public static boolean isNotBlank(String str) {
+        return !isBlank(str);
     }
 
     /**

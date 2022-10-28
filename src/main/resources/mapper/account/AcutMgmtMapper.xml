@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dunsum.backend.domains.account.dao.AcutMgmtDao">
+
+    <!-- UserGuestEntity unique 조회 -->
+    <select id="getUserGust" resultType="com.dunsum.backend.domains.entity.UserGustEntity" parameterType="com.dunsum.backend.domains.account.model.UserSrchModel">
+        /* AcutMgmtDao.getUserGust - javayaji */
+        SELECT UG.GUST_SEQ
+             , UG.USER_NO
+             , UG.CLNT_IP
+             , DATE_FORMAT(UG.LAST_LGIN_DATE, '%Y/%m/%d %H:%i') LAST_LGIN_DATE
+             , DATE_FORMAT(UG.RGST_DATE, '%Y/%m/%d %H:%i') RGST_DATE
+             , UG.RGST_USER_NO
+          FROM JV_USER_GUST UG
+         WHERE UG.DB_STAT = 'A'
+            <if test='gustSeq > 0'>
+                AND GUST_SEQ = ${gustSeq}
+            </if>
+            <if test='userNo > 0'>
+                AND USER_NO = ${userNo}
+            </if>
+            <if test='@com.dunsum.backend.common.utils.DunsumStringUtils@isNotBlank(clntIp)'>
+                AND CLNT_IP = #{clntIp}
+            </if>
+    </select>
+
+    <!-- UserGuestEntity 등록 -->
+    <insert id="insUserGust" parameterType="com.dunsum.backend.domains.entity.UserGustEntity" useGeneratedKeys="true" keyProperty="gustSeq" keyColumn="gustSeq">
+        /* AcutMgmtDao.insUserGust - javayaji */
+        INSERT INTO JV_USER_GUST
+        VALUES (
+            ${userNo}
+            , #{clntIp}
+            , 'A'
+            , NOW()
+            , NOW()
+            , 1
+        )
+    </insert>
+
+    <!-- UserEntity unique 조회 -->
+    <select id="getUser" resultType="com.dunsum.backend.domains.entity.UserEntity" parameterType="com.dunsum.backend.domains.account.model.UserSrchModel">
+        /* AcutMgmtDao.getUser - javayaji */
+        SELECT U.USER_NO
+             , U.LGIN_ID
+             , U.IDVL_EMAL
+             , U.GUST_YN
+             , U.GNDR
+             , DATE_FORMAT(U.PSWD_CHNG_DATE, '%Y/%m/%d %H:%i') PSWD_CHNG_DATE
+             , DATE_FORMAT(U.MDFT_DATE, '%Y/%m/%d %H:%i') MDFT_DATE
+             , U.MDFT_USER_NO
+             , DATE_FORMAT(U.RGST_DATE, '%Y/%m/%d %H:%i') RGST_DATE
+             , U.RGST_USER_NO
+          FROM JV_USER U
+         WHERE U.DB_STAT = 'A'
+        <if test='userNo > 0'>
+            AND U.USER_NO = ${userNo}
+        </if>
+        <if test='@com.dunsum.backend.common.utils.DunsumStringUtils@isNotBlank(lginId)'>
+            AND U.LGIN_ID = #{lginId}
+        </if>
+    </select>
+
+    <!-- UserGuestEntity 등록 -->
+    <insert id="insUser" parameterType="com.dunsum.backend.domains.entity.UserEntity" useGeneratedKeys="true" keyProperty="userNo" keyColumn="userNo">
+        /* AcutMgmtDao.insUser - javayaji */
+        INSERT INTO JV_USER
+        VALUES (
+            #{lginId}
+        <choose>
+            <!-- 게스트 등록 -->
+            <when test='"Y".equals(gustYn)'>
+                , '1'
+                , NULL
+                , 'Y'
+                , NULL
+                , 'A'
+                , NOW()
+                , NOW()
+                , 1
+                , NOW()
+                , 1
+            </when>
+            <!-- 회원가입 등록 -->
+            <otherwise>
+                , JV_ENC_F(#{webPswd})
+                , JV_ENC_F(#{idvlEmal})
+                , 'N'
+                , #{gndr}
+                , 'A'
+                , NOW()
+                , NOW()
+                , 1
+                , NOW()
+                , 1
+            </otherwise>
+        </choose>
+        )
+    </insert>
+</mapper>
