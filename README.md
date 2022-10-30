@@ -1,4 +1,12 @@
 DUNSUM
+
+# 버전 정보
+```
+  spring boot :: v2.7.4
+```
+
+***
+
 # 트리구조
 * backend (최상위 Directory)
   * common (운영에 필요한 모든 기능 - Config, Utils 등)
@@ -20,4 +28,16 @@ DUNSUM
 * ModelUtils
 * RestUtils
   * DnfApis
+
+
+***
+
+# 참고
+1. secretApplication.yml 분리
+```
+  secretApplication.yml 파일 생성 및 gitIgnore 등록
+  민감 정보 (DB 접속 정보, 개인 API-KEY 등) secretApplication.yml로 이관
+  application.yml에서 secretApplication.yml import
+  spriong boot version 확인 필수 (2.4.1 ↑)
+```
 

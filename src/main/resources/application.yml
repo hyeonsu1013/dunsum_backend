@@ -1,34 +1,20 @@
 project.name: dunsum
 
+# 보안 속성 모음 import
+spring:
+  config:
+    import: classpath:secretApplication.yml
+
 mybatis:
   mapper-locations: classpath:/mapper/**/*.xml
 
-
-
 # TODO local, dev(real) 분리
-# spring.profiles: local
+# spring.profiles: local > deprecated 이므로 지양
 
 server.port: 9090
 
 api:
   timeout: 60000
-
-spring:
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
-  datasource:
-    username: javayaji_a
-    password: javayajiA0820
-    url: jdbc:mysql://localhost:3306/dunsum?&serverTimezone=UTC&autoReconnect=true&allowMultiQueries=true&characterEncoding=UTF-8
-    driver: com.mysql.cj.jdbc.Driver
-
-outside:
-  connData:
-    dnf:
-      domain: https://api.neople.co.kr
-      key-name: apikey
-      key: Mn1vYhuBBf4xMmQhxaSQXPnp85SRzjbl
 
 batch:
   active.host : "127.0.0.1"
