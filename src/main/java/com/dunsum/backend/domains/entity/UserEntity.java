@@ -16,6 +16,9 @@ public class UserEntity extends BaseVO {
     @ApiModelProperty(value = "사용인번호")
     private long userNo;
 
+    @ApiModelProperty(value = "사용인별명")
+    private String userNknm;
+
     @ApiModelProperty(value = "로그인ID")
     private String lginId;
 

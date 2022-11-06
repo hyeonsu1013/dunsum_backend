@@ -10,4 +10,14 @@ public interface AcutMgmtService {
      */
     public UserEntity insGust(UserGustEntity entt) throws Exception;
 
+    /**
+     * User 회원가입
+     */
+    public UserEntity insUser(UserEntity entt) throws Exception;
+
+    /**
+     * User 정보조회
+     */
+    public UserEntity getUser(UserEntity entt) throws Exception;
+
 }

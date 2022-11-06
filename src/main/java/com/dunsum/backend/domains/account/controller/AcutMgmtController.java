@@ -24,4 +24,16 @@ public class AcutMgmtController {
     public UserEntity insGust(@RequestBody  UserGustEntity entt) throws Exception {
         return acutMgmtService.insGust(entt);
     }
+
+    @ApiOperation(value = "회원가입", notes = "")
+    @RequestMapping(value = "/ins/user", method = RequestMethod.POST)
+    public UserEntity insUser(@RequestBody  UserEntity entt) throws Exception {
+        return acutMgmtService.insUser(entt);
+    }
+
+    @ApiOperation(value = "유저정보 조회", notes = "")
+    @RequestMapping(value = "/get/user", method = RequestMethod.POST)
+    public UserEntity getUser(@RequestBody  UserEntity entt) throws Exception {
+        return acutMgmtService.getUser(entt);
+    }
 }

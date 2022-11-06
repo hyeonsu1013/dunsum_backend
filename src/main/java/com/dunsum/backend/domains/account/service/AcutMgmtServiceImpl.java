@@ -59,4 +59,14 @@ public class AcutMgmtServiceImpl implements AcutMgmtService {
 
         return rtnUser;
     }
+
+    @Override
+    public UserEntity insUser(UserEntity entt) throws Exception {
+        return null;
+    }
+
+    @Override
+    public UserEntity getUser(UserEntity entt) throws Exception {
+        return null;
+    }
 }
