@@ -25,7 +25,7 @@ public class SecurityConfig {
         http.authorizeRequests(
             authorizeRequests -> authorizeRequests
                     .antMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
-                    .antMatchers("/member/login", "/member/join")
+                    .antMatchers("/dunsum/api/acut/ins/gust", "/dunsum/api/acut/ins/user") // 게스트 로그인 또는 회원가입
                     .permitAll()
                     .anyRequest()
                     .authenticated() // 최소자격 : 로그인

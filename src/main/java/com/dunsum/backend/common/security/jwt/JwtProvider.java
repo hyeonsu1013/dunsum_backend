@@ -29,7 +29,6 @@ public class JwtProvider {
     private String header = SecurityConfig.HEADER_TOKEN;
 
     // AccessToken 생성
-    @Deprecated
     public String generateAccessToken(TokenUserModel user) {
 
         // Registered claim. 토큰에 대한 정보들이 담겨있는 클레임. 이미 이름이 등록되어있다.
@@ -71,18 +70,13 @@ public class JwtProvider {
 
     // Jwt 토큰으로 인증 정보를 조회
     public Authentication getAuthentication(String token) {
-        return getAuthentication(token, jwtSecretKey);
-    }
-
-
-    public Authentication getAuthentication(String token, SecretKey jwtSecretKey) {
 
         Claims claims = this.getClaims(token).getBody();
 
         TokenUserModel tokenUser = claimsToObject(claims);
         AuthUserDetail userDetail = new AuthUserDetail();
 
-        userDetail.setAccessToken(token);
+        userDetail.setUserToken(token);
         userDetail.setUserNo(tokenUser.getUserNo());
         userDetail.setUsername(tokenUser.getUserNknm());
         userDetail.setLginId(tokenUser.getLginId());
@@ -143,10 +137,10 @@ public class JwtProvider {
         return tokenUser;
     }
 
-    private Jws<Claims> getClaims(String token) {
-        return Jwts.parserBuilder()            // JwtParserBuilder 인스턴스 생성
-                .setSigningKey(jwtSecretKey) // JWT Signature 검증을 위한 SecretKey 설정
-                .build()                     // Thread-Safe 한 JwtParser 를 반환하기 위해 build 호출
+    public Jws<Claims> getClaims(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(jwtSecretKey)
+                .build()
                 .parseClaimsJws(token);
     }
 

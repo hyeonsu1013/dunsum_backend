@@ -1,5 +1,7 @@
 package com.dunsum.backend.domains.account.service;
 
+import com.dunsum.backend.common.security.jwt.JwtProvider;
+import com.dunsum.backend.common.security.model.TokenUserModel;
 import com.dunsum.backend.common.utils.RandomUtils;
 import com.dunsum.backend.domains.account.dao.AcutMgmtDao;
 import com.dunsum.backend.domains.account.model.UserSrchModel;
@@ -12,10 +14,12 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AcutMgmtServiceImpl implements AcutMgmtService {
 
+    private final JwtProvider jwtProvider;
+
     private final AcutMgmtDao acutMgmtDao;
 
     @Override
-    public UserEntity insGust(UserGustEntity entt) throws Exception {
+    public TokenUserModel insGust(UserGustEntity entt) throws Exception {
         UserEntity rtnUser = null;
         UserSrchModel srchModel = new UserSrchModel();
         srchModel.setClntIp(entt.getClntIp());
@@ -57,7 +61,12 @@ public class AcutMgmtServiceImpl implements AcutMgmtService {
             rtnUser = acutMgmtDao.getUser(srchModel);
         }
 
-        return rtnUser;
+        // TODO : 권한 등록
+        TokenUserModel tokenUserModel = (TokenUserModel)rtnUser;
+        String userToken = jwtProvider.generateAccessToken(tokenUserModel);
+        tokenUserModel.setUserToken(userToken);
+
+        return tokenUserModel;
     }
 
     @Override

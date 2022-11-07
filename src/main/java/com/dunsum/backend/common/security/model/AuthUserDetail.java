@@ -17,8 +17,6 @@ public class AuthUserDetail extends TokenUserModel implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    private String accessToken;
-
     public AuthUserDetail() {}
 
     @Override
@@ -82,11 +80,5 @@ public class AuthUserDetail extends TokenUserModel implements UserDetails {
 
     public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
         this.authorities = authorities;
-    }
-    public String getAccessToken() {
-        return accessToken;
-    }
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
     }
 }
