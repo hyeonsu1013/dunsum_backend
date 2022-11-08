@@ -4,7 +4,6 @@ import com.dunsum.backend.common.security.SecurityConfig;
 import com.dunsum.backend.common.security.model.AuthUserDetail;
 import com.dunsum.backend.common.security.model.TokenUserModel;
 import com.dunsum.backend.common.utils.DunsumStringUtils;
-import com.dunsum.backend.domains.account.service.AcutMgmtService;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,6 +12,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -24,9 +25,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class JwtProvider {
 
-    private final SecretKey jwtSecretKey;
+    private SecretKey jwtSecretKey;
 
     private String header = SecurityConfig.HEADER_TOKEN;
+
+    // SecretKey 생성
+    @PostConstruct
+    public void generateSecretKey() throws Exception{
+        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+        keyGenerator.init(128);
+        this.jwtSecretKey = keyGenerator.generateKey();
+    }
 
     // AccessToken 생성
     public String generateAccessToken(TokenUserModel user) {

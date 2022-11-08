@@ -14,6 +14,7 @@ DUNSUM
   * batch (batch 관련 모음)
 
 # 주요 기능
+* Spring Security 및 jjwt Token 적용
 * Batch Scheduler - Batch.java
 * MyBatis - MySQL 연결
 * Custom RestTemplate → RestUtils (외부연동 Api)
@@ -29,6 +30,11 @@ DUNSUM
 * RestUtils
   * DnfApis
 
+
+***
+
+# TODO 개발사항
+1. https 통신 구현 (현재 http 통신 중)
 
 ***
 

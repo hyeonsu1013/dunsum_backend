@@ -3,7 +3,6 @@ package com.dunsum.backend.common.security.filters;
 import com.dunsum.backend.common.security.jwt.JwtProvider;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,7 +14,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
@@ -35,8 +33,8 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                     Authentication auth = jwtProvider.getAuthentication(token);
                     SecurityContextHolder.getContext().setAuthentication(auth);
 
-                    if(claims.getBody() != null && claims.getBody().containsKey("userNo")){
-                        request.setAttribute("userNo", claims.getBody().get("userNo"));
+                    if(claims.getBody() != null && claims.getBody().containsKey("lginId")){
+                        request.setAttribute("lginId", claims.getBody().get("lginId"));
                     }
                 }
             }
