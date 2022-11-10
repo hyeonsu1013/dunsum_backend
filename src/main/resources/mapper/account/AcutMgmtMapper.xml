@@ -28,7 +28,14 @@
     <!-- UserGuestEntity 등록 -->
     <insert id="insUserGust" parameterType="com.dunsum.backend.domains.entity.UserGustEntity" useGeneratedKeys="true" keyProperty="gustSeq" keyColumn="gustSeq">
         /* AcutMgmtDao.insUserGust - javayaji */
-        INSERT INTO JV_USER_GUST
+        INSERT INTO JV_USER_GUST (
+            USER_NO
+            , CLNT_IP
+            , DB_STAT
+            , LAST_LGIN_DATE
+            , RGST_DATE
+            , RGST_USER_NO
+        )
         VALUES (
             ${userNo}
             , #{clntIp}
@@ -42,7 +49,7 @@
     <!-- UserEntity unique 조회 -->
     <select id="getUser" resultType="com.dunsum.backend.domains.entity.UserEntity" parameterType="com.dunsum.backend.domains.account.model.UserSrchModel">
         /* AcutMgmtDao.getUser - javayaji */
-        SELECT U.USER_NO
+        SELECT U.USER_NO as userNo
              , U.LGIN_ID
              , U.IDVL_EMAL
              , U.GUST_YN
@@ -65,9 +72,23 @@
     <!-- UserGuestEntity 등록 -->
     <insert id="insUser" parameterType="com.dunsum.backend.domains.entity.UserEntity" useGeneratedKeys="true" keyProperty="userNo" keyColumn="userNo">
         /* AcutMgmtDao.insUser - javayaji */
-        INSERT INTO JV_USER
+        INSERT INTO JV_USER (
+            USER_NKNM
+            , LGIN_ID
+            , WEB_PSWD
+            , IDVL_EMAL
+            , GUST_YN
+            , GNDR
+            , DB_STAT
+            , PSWD_CHNG_DATE
+            , MDFT_DATE
+            , MDFT_USER_NO
+            , RGST_DATE
+            , RGST_USER_NO
+        )
         VALUES (
             #{lginId}
+          , #{lginId}
         <choose>
             <!-- 게스트 등록 -->
             <when test='"Y".equals(gustYn)'>

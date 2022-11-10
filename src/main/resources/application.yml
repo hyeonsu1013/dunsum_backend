@@ -16,6 +16,16 @@ server.port: 9090
 api:
   timeout: 60000
 
+logging:
+  level:
+    jdbc:
+      sqlonly: info
+      sqltiming: info
+      resultsettable: info
+      audit: off
+      resultset: off
+      connection: off
+
 batch:
   active.host : "127.0.0.1"
   cronData:

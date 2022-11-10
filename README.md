@@ -17,11 +17,20 @@ DUNSUM
 * Spring Security 및 jjwt Token 적용
 * Batch Scheduler - Batch.java
 * MyBatis - MySQL 연결
+* Log4jdbc 사용 - logback(미구현)
 * Custom RestTemplate → RestUtils (외부연동 Api)
 * ControllerAuthAspect 구현 - 외부 Api 호출(구현) / 권한(미구현)
 * 외부 API 호출 시 조회 이중화 작업 (외부 API 호출 실패 시 DB 조회)
 
-# 주요 Utils Class
+# 공통 Service Class
+* CommonService
+
+# 공통 Utils Class
+```
+공통 Service와 공통 Utils의 차이
+  Service : 운용에 필요한 공통 기능 (Method) Class
+  Utils : 특정 Class 혹은 기능에 따른 모듈 Class
+```
 * DunsumStringUtils
 * DunsumObjectUtils
 * DunsumUrlUtils

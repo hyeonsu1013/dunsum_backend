@@ -1,6 +1,7 @@
 package com.dunsum.backend.domains.account.controller;
 
 import com.dunsum.backend.common.security.model.TokenUserModel;
+import com.dunsum.backend.common.service.CommonService;
 import com.dunsum.backend.domains.account.service.AcutMgmtService;
 import com.dunsum.backend.domains.entity.UserEntity;
 import com.dunsum.backend.domains.entity.UserGustEntity;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RequestMapping("/${project.name}/api/acut")
 @RestController
 @RequiredArgsConstructor
@@ -22,7 +25,8 @@ public class AcutMgmtController {
 
     @ApiOperation(value = "Guest 로그인", notes = "")
     @RequestMapping(value = "/ins/gust", method = RequestMethod.POST)
-    public TokenUserModel insGust(@RequestBody  UserGustEntity entt) throws Exception {
+    public TokenUserModel insGust(@RequestBody  UserGustEntity entt, HttpServletRequest request) throws Exception {
+        entt.setClntIp(CommonService.getClientIP(request));
         return acutMgmtService.insGust(entt);
     }
 

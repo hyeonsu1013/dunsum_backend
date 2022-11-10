@@ -2,8 +2,10 @@ package com.dunsum.backend.domains.account.service;
 
 import com.dunsum.backend.common.security.jwt.JwtProvider;
 import com.dunsum.backend.common.security.model.TokenUserModel;
+import com.dunsum.backend.common.service.CommonService;
 import com.dunsum.backend.common.utils.RandomUtils;
 import com.dunsum.backend.domains.account.dao.AcutMgmtDao;
+import com.dunsum.backend.domains.account.model.AccountDataModel;
 import com.dunsum.backend.domains.account.model.UserSrchModel;
 import com.dunsum.backend.domains.entity.UserEntity;
 import com.dunsum.backend.domains.entity.UserGustEntity;
@@ -30,7 +32,6 @@ public class AcutMgmtServiceImpl implements AcutMgmtService {
         // 기등록된 게스트인 경우
         if(orgUserGust != null){
             srchModel.setUserNo(orgUserGust.getUserNo());
-            rtnUser = acutMgmtDao.getUser(srchModel);
         }
         // 신규 게스트 등록
         else {
@@ -39,14 +40,13 @@ public class AcutMgmtServiceImpl implements AcutMgmtService {
             String guestId = "";
 
             do {
-                UserEntity userSrchEntt = new UserEntity();
-                guestId = "GUEST_#" + RandomUtils.getRndmPswd(8);
+                guestId = AccountDataModel.GUEST_PRE_ID + RandomUtils.getRndmPswd(8);
                 srchModel.setLginId(guestId);
                 userEntt = acutMgmtDao.getUser(srchModel);
             } while (userEntt != null);
 
             UserEntity userInsEntt = new UserEntity();
-            userInsEntt.setGustYn("Y");
+            userInsEntt.setGustYn(AccountDataModel.GUEST_O);
             userInsEntt.setLginId(guestId);
 
             // User 등록
@@ -58,10 +58,11 @@ public class AcutMgmtServiceImpl implements AcutMgmtService {
             acutMgmtDao.insUserGust(entt);
             // 등록된 User 조회
             srchModel.setUserNo(entt.getUserNo());
-            rtnUser = acutMgmtDao.getUser(srchModel);
         }
 
-        // TODO : 권한 등록
+        rtnUser = acutMgmtDao.getUser(srchModel);
+
+        // TODO : 권한 등록, 여기서부터 작업 시작 : classCastExpt
         TokenUserModel tokenUserModel = (TokenUserModel)rtnUser;
         String userToken = jwtProvider.generateAccessToken(tokenUserModel);
         tokenUserModel.setUserToken(userToken);
