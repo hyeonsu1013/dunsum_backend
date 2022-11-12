@@ -2,7 +2,6 @@ package com.dunsum.backend.domains.account.service;
 
 import com.dunsum.backend.common.security.jwt.JwtProvider;
 import com.dunsum.backend.common.security.model.TokenUserModel;
-import com.dunsum.backend.common.service.CommonService;
 import com.dunsum.backend.common.utils.DunsumObjectUtils;
 import com.dunsum.backend.common.utils.RandomUtils;
 import com.dunsum.backend.domains.account.dao.AcutMgmtDao;
@@ -12,9 +11,11 @@ import com.dunsum.backend.domains.entity.UserEntity;
 import com.dunsum.backend.domains.entity.UserGustEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(rollbackFor=Exception.class)
 public class AcutMgmtServiceImpl implements AcutMgmtService {
 
     private final JwtProvider jwtProvider;
