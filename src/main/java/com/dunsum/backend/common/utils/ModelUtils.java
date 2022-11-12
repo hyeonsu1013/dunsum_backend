@@ -56,10 +56,11 @@ public class ModelUtils {
             case "decimal":
                 dataType = "BigDecimal";
                 break;
-            case "datetime":
-            case "timestamp":
-                dataType = "Timestamp";
-                break;
+            // 날짜 타입 모두 String 처리
+//            case "datetime":
+//            case "timestamp":
+//                dataType = "Timestamp";
+//                break;
             default:
                 dataType = "String";
                 break;
@@ -130,9 +131,9 @@ public class ModelUtils {
         importList.add("import lombok.Data;");
         importList.add("import lombok.EqualsAndHashCode;");
 
-        if(hasTimestamp){
-            importList.add("\r\nimport java.sql.Timestamp;");
-        }
+//        if(hasTimestamp){
+//            importList.add("\r\nimport java.sql.Timestamp;");
+//        }
 
         List<ColumnVO> sortColList = colList.stream()
                 .sorted((e1, e2) -> Integer.compare(Integer.parseInt(e1.getOrdinalPosition())

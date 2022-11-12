@@ -7,6 +7,13 @@ spring:
 
 mybatis:
   mapper-locations: classpath:/mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: false
+    jdbc-type-for-null: VARCHAR
+    call-setters-on-nulls: true
+    return-instance-for-empty-row: true
 
 # TODO local, dev(real) 분리
 # spring.profiles: local > deprecated 이므로 지양
