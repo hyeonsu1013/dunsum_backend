@@ -6,8 +6,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.sql.Timestamp;
-
 @Data
 @EqualsAndHashCode(callSuper=false)
 @ApiModel(description = "GUEST 사용자 테이블")
@@ -26,6 +24,6 @@ public class UserGustEntity extends BaseVO {
     private String dbStat;
 
     @ApiModelProperty(value = "최종접속일")
-    private Timestamp lastLginDate;
+    private String lastLginDate;
 
 }

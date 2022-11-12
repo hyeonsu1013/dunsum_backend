@@ -6,8 +6,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.sql.Timestamp;
-
 @Data
 @EqualsAndHashCode(callSuper=false)
 @ApiModel(description = "배치로그관리")
@@ -20,13 +18,13 @@ public class BachLogEntity extends BaseVO {
     private String bachMgmtId;
 
     @ApiModelProperty(value = "시작일")
-    private Timestamp stDate;
+    private String stDate;
 
     @ApiModelProperty(value = "종료일")
-    private Timestamp edDate;
+    private String edDate;
 
     @ApiModelProperty(value = "에러일")
-    private Timestamp errDate;
+    private String errDate;
 
     @ApiModelProperty(value = "실행 타입")
     private String runType;

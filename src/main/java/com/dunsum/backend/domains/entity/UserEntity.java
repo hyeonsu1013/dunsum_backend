@@ -6,8 +6,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.sql.Timestamp;
-
 @Data
 @EqualsAndHashCode(callSuper=false)
 @ApiModel(description = "사용자 테이블")
@@ -38,6 +36,6 @@ public class UserEntity extends BaseVO {
     private String dbStat;
 
     @ApiModelProperty(value = "비밀번호변경일")
-    private Timestamp pswdChngDate;
+    private String pswdChngDate;
 
 }

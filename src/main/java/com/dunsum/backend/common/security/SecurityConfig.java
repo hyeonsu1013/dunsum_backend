@@ -35,7 +35,8 @@ public class SecurityConfig {
                     .antMatchers(
                             "/dunsum/api/acut/ins/gust",
                             "/dunsum/api/acut/ins/user",
-                            "/dunsum/api/otsd/dnf/srvr/sel") // 게스트 로그인 또는 회원가입
+                            "/dunsum/api/otsd/dnf/srvr/sel", // 게스트 로그인 또는 회원가입
+                            "/dunsum/api/admin/ins/entt")
                     .permitAll()
                     .anyRequest()
                     .authenticated() // 최소자격 : 로그인
