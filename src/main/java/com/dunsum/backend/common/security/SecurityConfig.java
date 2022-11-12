@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -20,11 +21,17 @@ public class SecurityConfig {
     public static final String HEADER_TOKEN = "D-Auth-Token";
 
     private final JwtAuthorizationFilter jwtAuthorizationFilter;
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().antMatchers("/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger/**");
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationConfiguration authenticationConfiguration) throws Exception {
         http.authorizeRequests(
             authorizeRequests -> authorizeRequests
-                    .antMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+                    .antMatchers("/h2-console/**").permitAll() // 누구나 h2-console 접속 허용
                     .antMatchers(
                             "/dunsum/api/acut/ins/gust",
                             "/dunsum/api/acut/ins/user",
