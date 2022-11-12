@@ -39,6 +39,9 @@ public class JwtProvider {
 
     // AccessToken 생성
     public String generateAccessToken(TokenUserModel user) {
+        if(user == null){
+            return null;
+        }
 
         // Registered claim. 토큰에 대한 정보들이 담겨있는 클레임. 이미 이름이 등록되어있다.
         // 토큰제목(sub). 고유 식별자를 넣는다.

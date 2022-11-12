@@ -3,13 +3,13 @@ package com.dunsum.backend.common.utils;
 import com.dunsum.backend.common.vo.BaseVO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class DunsumObjectUtils {
 
@@ -100,5 +100,68 @@ public class DunsumObjectUtils {
         }
 
         return 0;
+    }
+
+    /**
+     *  객체복사
+     *  @return T : return 객체 타입
+     *  @param rtnClz : return 객체의 Class
+     *  @param copyModel : 복사할 Object
+     *  @param superCntn : 상위클래스 Field 포함 여부
+     *  @author kb0153
+     */
+    public static <T> T getCloneObject(Class<T> rtnClz, Object copyModel, boolean superCntn) {
+        try {
+            Class<?> clazz = copyModel.getClass();
+
+            // 반환할 Instance 생성
+            Constructor<T> cons = rtnClz.getDeclaredConstructor();
+            T clone = cons.newInstance();
+
+            // 반환할 Instance의 Field Name 목록
+            List<String> rtnFieldNameList = new ArrayList<String>();
+            List<Field> fieldList = superCntn ? getAllFields(rtnClz) : Arrays.asList(rtnClz.getDeclaredFields());
+            for(Field field : fieldList) {
+                rtnFieldNameList.add(field.getName());
+            }
+
+            // Field 값 복사
+            List<Field> copyFieldList = superCntn ? getAllFields(clazz) : Arrays.asList(rtnClz.getDeclaredFields());
+            for (Field field : copyFieldList) {
+                // 복사할 Object final, static Field 통과
+                if(Modifier.isFinal(field.getModifiers()) || Modifier.isStatic(field.getModifiers())) {
+                    continue;
+                }
+                // 복사할 Object Field가 반환할 Object Field에 포함되어 있는지 확인
+                if(!rtnFieldNameList.contains(field.getName())) {
+                    continue;
+                }
+
+                field.setAccessible(true);
+                Object data = field.get(copyModel);
+                field.set(clone, data);
+
+                field.setAccessible(false);
+            }
+            return clone;
+        } catch (Throwable e) {}
+
+        return null;
+    }
+
+    /**
+     * 상위 클래스를 포함한 모든 Field 반환
+     * @param clazz class
+     * @return List
+     */
+    public static <T> List<Field> getAllFields(Class<? super T> clazz){
+        Objects.requireNonNull(clazz);
+
+        List<Field> fields = new ArrayList<>();
+        while(clazz != null){
+            fields.addAll(Arrays.asList(clazz.getDeclaredFields()));
+            clazz = clazz.getSuperclass();
+        }
+        return fields;
     }
 }

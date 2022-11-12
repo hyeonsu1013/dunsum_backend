@@ -3,6 +3,7 @@ package com.dunsum.backend.domains.account.service;
 import com.dunsum.backend.common.security.jwt.JwtProvider;
 import com.dunsum.backend.common.security.model.TokenUserModel;
 import com.dunsum.backend.common.service.CommonService;
+import com.dunsum.backend.common.utils.DunsumObjectUtils;
 import com.dunsum.backend.common.utils.RandomUtils;
 import com.dunsum.backend.domains.account.dao.AcutMgmtDao;
 import com.dunsum.backend.domains.account.model.AccountDataModel;
@@ -62,10 +63,12 @@ public class AcutMgmtServiceImpl implements AcutMgmtService {
 
         rtnUser = acutMgmtDao.getUser(srchModel);
 
-        // TODO : 권한 등록, 여기서부터 작업 시작 : classCastExpt
-        TokenUserModel tokenUserModel = (TokenUserModel)rtnUser;
-        String userToken = jwtProvider.generateAccessToken(tokenUserModel);
-        tokenUserModel.setUserToken(userToken);
+        TokenUserModel tokenUserModel = DunsumObjectUtils.getCloneObject(TokenUserModel.class, rtnUser, true);
+
+        if(tokenUserModel != null){
+            String userToken = jwtProvider.generateAccessToken(tokenUserModel);
+            tokenUserModel.setUserToken(userToken);
+        }
 
         return tokenUserModel;
     }
