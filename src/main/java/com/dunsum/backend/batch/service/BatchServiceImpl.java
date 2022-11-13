@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Map;
 
 @Service
@@ -43,6 +44,8 @@ public class BatchServiceImpl implements BatchService {
     private final AppOutsideVO appOutsideVO;
 
     private final String DNF_CONN_DATA_NAME = OutsideEnumFactory.OutApisEnum.DNF.getName();
+
+    private final SimpleDateFormat SMPL_DATE_FORM = new SimpleDateFormat("yyyyMMddHHmmss");
 
     private final long SYS_USER_NO = SystemDTO.SYS_USER_NO;
 
@@ -91,7 +94,7 @@ public class BatchServiceImpl implements BatchService {
 
         BachLogEntity logBatch = new BachLogEntity();
         logBatch.setMsg(msg);
-        logBatch.setStDate(timestamp);
+        logBatch.setStDate(SMPL_DATE_FORM.format(timestamp));
         logBatch.setRgstUserNo(rgstUserNo);
         logBatch.setBachMgmtId(logMgmtSeq);
         logBatch.setRunType(BatchMgmtFactory.getRunType(isBatch));
@@ -104,7 +107,7 @@ public class BatchServiceImpl implements BatchService {
         if(logBatch.getBachSeq() != 0) {
             logBatch.setMsg(msg);
             logBatch.setRunTime(this.procTimeMsg(stTime, edTime));
-            logBatch.setEdDate(new Timestamp(edTime));
+            logBatch.setEdDate(SMPL_DATE_FORM.format(new Timestamp(edTime)));
             batchLogDao.updBachLog(logBatch);
         }
     }
@@ -183,7 +186,7 @@ public class BatchServiceImpl implements BatchService {
                 edTime = System.currentTimeMillis();
                 if(logEntt != null){
                     if (!BatchMgmtFactory.getSuccCode().equals(result.getResultCode())) {
-                        logEntt.setErrDate(new Timestamp(errTime));
+                        logEntt.setErrDate(SMPL_DATE_FORM.format(new Timestamp(errTime)));
                     }
 
                     if(!DunsumStringUtils.isBlank(subMsg)){
@@ -192,7 +195,7 @@ public class BatchServiceImpl implements BatchService {
 
                     if(info != null){
                         String msg = this.getMsg(info, false);
-                        logEntt.setEdDate(new Timestamp(edTime));
+                        logEntt.setEdDate(SMPL_DATE_FORM.format(new Timestamp(edTime)));
                         this.updBachLogFnal(logEntt, msg, stTime, edTime);
                     } else {
                         bachLogger.error("Batch run Error - info is null :: {}, {}, {}, {}", isBatch, methodName, appCronDataVO.toString(), subMsg);
