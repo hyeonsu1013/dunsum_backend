@@ -31,9 +31,9 @@ public class JwtProvider {
 
     // SecretKey 생성
     @PostConstruct
-    public void generateSecretKey() throws Exception{
-        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-        keyGenerator.init(128);
+    public void generateSecretKey() throws Exception {
+        KeyGenerator keyGenerator = KeyGenerator.getInstance("HmacSHA256");
+        keyGenerator.init(512);
         this.jwtSecretKey = keyGenerator.generateKey();
     }
 
