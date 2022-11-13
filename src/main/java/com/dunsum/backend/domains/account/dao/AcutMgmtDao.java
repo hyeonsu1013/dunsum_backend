@@ -20,4 +20,7 @@ public interface AcutMgmtDao {
     // UserEntity 등록
     public void insUser(UserEntity userEntity) throws Exception;
 
+    // Guest 최종 로그인일자 수정
+    public void updLastLgin(long gustSeq) throws Exception;
+
 }

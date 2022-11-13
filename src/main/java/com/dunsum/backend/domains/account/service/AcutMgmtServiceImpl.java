@@ -33,6 +33,7 @@ public class AcutMgmtServiceImpl implements AcutMgmtService {
 
         // 기등록된 게스트인 경우
         if(orgUserGust != null){
+            acutMgmtDao.updLastLgin(orgUserGust.getGustSeq());
             srchModel.setUserNo(orgUserGust.getUserNo());
         }
         // 신규 게스트 등록
@@ -69,6 +70,7 @@ public class AcutMgmtServiceImpl implements AcutMgmtService {
         if(tokenUserModel != null){
             String userToken = jwtProvider.generateAccessToken(tokenUserModel);
             tokenUserModel.setUserToken(userToken);
+            tokenUserModel.setClntIp(entt.getClntIp());
         }
 
         return tokenUserModel;
