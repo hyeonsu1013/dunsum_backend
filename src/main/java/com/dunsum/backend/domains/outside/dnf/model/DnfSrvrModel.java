@@ -16,6 +16,6 @@ import java.util.List;
 public class DnfSrvrModel extends DnfModel {
 
     @ApiModelProperty(value="서버 목록")
-    List<DnfSrvrEntity> rows;
+    private List<DnfSrvrEntity> rows;
 
 }

@@ -87,7 +87,8 @@ public class DnfEnumsFactory {
     @Getter
     @AllArgsConstructor
     public enum DnfApiEnums {
-        SEL_SERVERS("/servers", HttpMethod.GET, false);
+        SEL_SERVERS("/servers", HttpMethod.GET, false),
+        SEL_JOBS("/jobs", HttpMethod.GET, false);
 
         private final String url;
         private final HttpMethod httpMethod;

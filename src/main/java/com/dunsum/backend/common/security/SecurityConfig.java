@@ -36,7 +36,9 @@ public class SecurityConfig {
                             "/dunsum/api/acut/ins/gust",
                             "/dunsum/api/acut/ins/user",
                             "/dunsum/api/otsd/dnf/srvr/sel", // 게스트 로그인 또는 회원가입
-                            "/dunsum/api/admin/ins/entt")
+                            "/dunsum/api/admin/ins/entt",
+                            "/dunsum/api/swgr/**",
+                            "/dunsum/api/otsd/dnf/**") // 임시추가
                     .permitAll()
                     .anyRequest()
                     .authenticated() // 최소자격 : 로그인

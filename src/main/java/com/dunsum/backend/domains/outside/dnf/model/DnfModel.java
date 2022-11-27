@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 public class DnfModel extends BaseVO {
 
     @ApiModelProperty(value="조회 타입")
-    String selType;
+    private String selType;
 
     @ApiModelProperty(value="조회 실패 사유")
-    String failRson;
+    private String failRson;
 }
