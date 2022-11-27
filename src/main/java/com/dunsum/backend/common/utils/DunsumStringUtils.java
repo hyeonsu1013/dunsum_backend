@@ -18,6 +18,11 @@ public class DunsumStringUtils {
         return !isBlank(str);
     }
 
+    public static String defaultStr(String str, String defaultStr) {
+        if(isBlank(str)) return defaultStr;
+        else return str;
+    }
+
     /**
      * 접두사 제거
      * @param str 변경대상

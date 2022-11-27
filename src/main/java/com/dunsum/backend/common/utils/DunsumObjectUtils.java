@@ -14,7 +14,7 @@ import java.util.*;
 public class DunsumObjectUtils {
 
     @SuppressWarnings({ "rawtypes"})
-    public static boolean isBlank(Object o) throws Exception {
+    public static boolean isBlank(Object o) {
         if(o == null) {
             return true;
         }
@@ -58,6 +58,8 @@ public class DunsumObjectUtils {
 
         return result;
     }
+
+    public static boolean isNotBlank(Object o) { return !isBlank(o); }
 
     @SuppressWarnings({ "unchecked"})
     public static Map<String, Object> convertMap(Object o) throws Exception {
