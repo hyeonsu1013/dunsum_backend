@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dunsum.backend.domains.common.dao.CommDao">
+
+    <select id="selCode" resultType="com.dunsum.backend.domains.entity.CodeEntity" parameterType="com.dunsum.backend.domains.entity.CodeEntity">
+        /* CommDao.selCode - javayaji */
+        SELECT CODE_INI
+             , CODE_INI_NAME
+             , CODE_ID
+             , CODE_ID_NAME
+             , PRNT_INI
+             , PRNT_ID
+             , USE_YN
+             , DISP_YN
+             , DISP_ODER
+             , CODE_DESC
+             , DATE_FORMAT(RGST_DATE, '%Y/%m/%d %H:%i') RGST_DATE
+             , RGST_USER_NO
+        FROM JV_CODE
+        <where>
+            <if test='!"".equals(codeGrup)'>
+                AND CODE_GRUP = #{codeGrup}
+            </if>
+            <if test='!"".equals(codeId)'>
+                AND CODE_ID = #{codeId}
+            </if>
+            <if test='"Y".equals(useYn)'>
+                AND USE_YN = 'Y'
+            </if>
+            <if test='"Y".equals(dispYn)'>
+                AND DISP_YN = 'Y'
+            </if>
+            <if test='!"".equals(prntGrup)'>
+                AND PRNT_GRUP = #{prntGrup}
+            </if>
+            <if test='!"".equals(prntId)'>
+                AND PRNT_ID = #{prntId}
+            </if>
+        </where>
+        ORDER BY DISP_ODER
+    </select>
+
+    <insert id="insCode" parameterType="java.util.List">
+        /* CommDao.insCode - javayaji */
+        INSERT INTO JV_CODE (
+        CODE_INI
+        , CODE_INI_NAME
+        , CODE_ID
+        , CODE_ID_NAME
+        , PRNT_INI
+        , PRNT_ID
+        , USE_YN
+        , DISP_YN
+        , DISP_ODER
+        , CODE_DESC
+        , RGST_DATE
+        , RGST_USER_NO
+        )
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=", ">
+            (
+            #{item.codeIni}
+            , #{item.codeIniName}
+            , #{item.codeId}
+            , #{item.codeIdName}
+            , #{item.prntIni}
+            , #{item.prntId}
+            , IFNULL(#{item.useYn}, 'Y')
+            , IFNULL(#{item.dispYn}, 'Y')
+            , #{index}
+            , #{item.codeDesc}
+            , NOW()
+            , #{item.rgstUserNo}
+            )
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        CODE_INI_NAME = VALUES(CODE_INI_NAME)
+        , CODE_ID_NAME = VALUES(CODE_ID_NAME)
+        , PRNT_INI = VALUES(PRNT_INI)
+        , PRNT_ID = VALUES(PRNT_ID)
+        , USE_YN = VALUES(USE_YN)
+        , DISP_YN = VALUES(DISP_YN)
+        , DISP_ODER = VALUES(DISP_ODER)
+        , RGST_DATE = VALUES(RGST_DATE)
+        , RGST_USER_NO = VALUES(RGST_USER_NO)
+    </insert>
+
+    <update id="delLogicCode" parameterType="java.util.List">
+        UPDATE JV_CODE C
+        SET C.USE_YN = 'N'
+        , C.DISP_YN = 'N'
+        WHERE (C.CODE_INI, C.CODE_ID) NOT IN
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            (#{item.codeIni}, #{item.codeId})
+        </foreach>
+    </update>
+</mapper>
