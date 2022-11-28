@@ -4,7 +4,7 @@ import com.dunsum.backend.common.dto.SystemDTO;
 import com.dunsum.backend.common.utils.DunsumObjectUtils;
 import com.dunsum.backend.common.utils.DunsumStringUtils;
 import com.dunsum.backend.common.utils.RestUtils;
-import com.dunsum.backend.domains.common.CommService;
+import com.dunsum.backend.domains.common.service.CommService;
 import com.dunsum.backend.domains.entity.CodeEntity;
 import com.dunsum.backend.domains.entity.CodeMpngEntity;
 import com.dunsum.backend.domains.entity.DnfSrvrEntity;

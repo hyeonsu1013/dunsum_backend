@@ -17,7 +17,7 @@ public interface CommDao {
     /**
      * 코드 조회
      */
-    List<CodeEntity> selCode(List<String> codeInis) throws Exception;
+    List<CodeEntity> selCodeFromIni(List<String> codeInis) throws Exception;
 
     /**
      * 코드 등록

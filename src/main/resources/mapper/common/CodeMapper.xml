@@ -41,7 +41,7 @@
         ORDER BY DISP_ODER
     </select>
 
-    <select id="selCode" resultType="com.dunsum.backend.domains.entity.CodeEntity" parameterType="java.util.List">
+    <select id="selCodeFromIni" resultType="com.dunsum.backend.domains.entity.CodeEntity" parameterType="java.util.List">
         /* CommDao.selCode - javayaji */
         SELECT CODE_INI
         , CODE_INI_NAME

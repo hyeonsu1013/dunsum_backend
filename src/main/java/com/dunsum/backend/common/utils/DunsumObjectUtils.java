@@ -166,4 +166,14 @@ public class DunsumObjectUtils {
         }
         return fields;
     }
+
+    /**
+     * List가 null이면 새로운 List 반환
+     * @param list
+     * @return
+     * @param <T>
+     */
+    public static <T> List<T> wrapping(List<T> list) {
+        return Optional.ofNullable(list).orElse(Collections.emptyList());
+    }
 }
