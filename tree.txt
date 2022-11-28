@@ -1,0 +1,143 @@
+treee -l 10 --ignore 'target' -o tree.txt
+
+D:\real_project\dunsum\backend
+├── HELP.md
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+├── README.md
+├── src
+|  ├── main
+|  |  ├── java
+|  |  |  └── com
+|  |  |     └── dunsum
+|  |  |        └── backend
+|  |  |           ├── BackendApplication.java
+|  |  |           ├── batch
+|  |  |           |  ├── Batch.java
+|  |  |           |  ├── dao
+|  |  |           |  |  ├── BatchDao.java
+|  |  |           |  |  └── BatchLogDao.java
+|  |  |           |  ├── enums
+|  |  |           |  |  └── BatchMgmtFactory.java
+|  |  |           |  ├── model
+|  |  |           |  |  └── BatchResultModel.java
+|  |  |           |  └── service
+|  |  |           |     ├── BatchService.java
+|  |  |           |     └── BatchServiceImpl.java
+|  |  |           ├── common
+|  |  |           |  ├── aspect
+|  |  |           |  |  └── ControllerAuthAspect.java
+|  |  |           |  ├── config
+|  |  |           |  |  └── SwaggerConfig.java
+|  |  |           |  ├── dto
+|  |  |           |  |  └── SystemDTO.java
+|  |  |           |  ├── security
+|  |  |           |  |  ├── filters
+|  |  |           |  |  |  └── JwtAuthorizationFilter.java
+|  |  |           |  |  ├── jwt
+|  |  |           |  |  |  ├── JwtAccessDeniedHandler.java
+|  |  |           |  |  |  ├── JwtEntryPoint.java
+|  |  |           |  |  |  └── JwtProvider.java
+|  |  |           |  |  ├── model
+|  |  |           |  |  |  ├── AuthUserDetail.java
+|  |  |           |  |  |  └── TokenUserModel.java
+|  |  |           |  |  └── SecurityConfig.java
+|  |  |           |  ├── service
+|  |  |           |  |  └── CommonService.java
+|  |  |           |  ├── utils
+|  |  |           |  |  ├── DunsumObjectUtils.java
+|  |  |           |  |  ├── DunsumStringUtils.java
+|  |  |           |  |  ├── DunsumUrlUtils.java
+|  |  |           |  |  ├── MapperUtils.java
+|  |  |           |  |  ├── ModelUtils.java
+|  |  |           |  |  ├── RandomUtils.java
+|  |  |           |  |  └── RestUtils.java
+|  |  |           |  └── vo
+|  |  |           |     ├── BaseVO.java
+|  |  |           |     ├── ColumnVO.java
+|  |  |           |     ├── environment
+|  |  |           |     |  ├── AppBatchVO.java
+|  |  |           |     |  ├── AppConnDataVO.java
+|  |  |           |     |  ├── AppCronDataVO.java
+|  |  |           |     |  ├── AppDataSourceVO.java
+|  |  |           |     |  └── AppOutsideVO.java
+|  |  |           |     ├── SrchVO.java
+|  |  |           |     └── TableVO.java
+|  |  |           └── domains
+|  |  |              ├── account
+|  |  |              |  ├── controller
+|  |  |              |  |  └── AcutMgmtController.java
+|  |  |              |  ├── dao
+|  |  |              |  |  └── AcutMgmtDao.java
+|  |  |              |  ├── model
+|  |  |              |  |  ├── AccountDataModel.java
+|  |  |              |  |  └── UserSrchModel.java
+|  |  |              |  └── service
+|  |  |              |     ├── AcutMgmtService.java
+|  |  |              |     └── AcutMgmtServiceImpl.java
+|  |  |              ├── common
+|  |  |              |  ├── CommRestController.java
+|  |  |              |  ├── dao
+|  |  |              |  |  └── CommDao.java
+|  |  |              |  └── service
+|  |  |              |     └── CommService.java
+|  |  |              ├── dashbord
+|  |  |              |  ├── controller
+|  |  |              |  |  └── DashbordController.java
+|  |  |              |  ├── dao
+|  |  |              |  |  └── DashbordDao.java
+|  |  |              |  ├── model
+|  |  |              |  |  └── DashbordSrchModel.java
+|  |  |              |  └── service
+|  |  |              |     ├── DashbordService.java
+|  |  |              |     └── DashbordServiceImpl.java
+|  |  |              ├── entity
+|  |  |              |  ├── BachLogEntity.java
+|  |  |              |  ├── CodeEntity.java
+|  |  |              |  ├── CodeMpngEntity.java
+|  |  |              |  ├── DnfCharEntity.java
+|  |  |              |  ├── DnfSrvrEntity.java
+|  |  |              |  ├── DumyEntity.java
+|  |  |              |  ├── ScrtEntity.java
+|  |  |              |  ├── UserEntity.java
+|  |  |              |  └── UserGustEntity.java
+|  |  |              └── outside
+|  |  |                 ├── dnf
+|  |  |                 |  ├── controller
+|  |  |                 |  ├── dao
+|  |  |                 |  ├── enums
+|  |  |                 |  ├── model
+|  |  |                 |  └── service
+|  |  |                 ├── model
+|  |  |                 |  └── OtsdModel.java
+|  |  |                 └── OutsideEnumFactory.java
+|  |  └── resources
+|  |     ├── application.yml
+|  |     ├── log4jdbc.log4j2.properties
+|  |     ├── mapper
+|  |     |  ├── account
+|  |     |  |  └── AcutMgmtMapper.xml
+|  |     |  ├── batch
+|  |     |  |  └── BatchLogMapper.xml
+|  |     |  ├── common
+|  |     |  |  └── CodeMapper.xml
+|  |     |  ├── dashbord
+|  |     |  |  └── DashbordMapper.xml
+|  |     |  └── outside
+|  |     |     └── dnf
+|  |     |        └── DnfSrvrMapper.xml
+|  |     ├── secretApplication.yml
+|  |     ├── static
+|  |     └── templates
+|  └── test
+|     └── java
+|        └── com
+|           └── dunsum
+|              └── backend
+|                 └── BackendApplicationTests.java
+└── tree.txt
+
+directory: 114 file: 158
+
+ignored: directory (1)
