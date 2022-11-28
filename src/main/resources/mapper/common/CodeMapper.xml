@@ -19,10 +19,10 @@
              , RGST_USER_NO
         FROM JV_CODE
         <where>
-            <if test='!"".equals(codeGrup)'>
+            <if test='@com.dunsum.backend.common.utils.MapperUtils@isNotEmpty(codeGrup)'>
                 AND CODE_GRUP = #{codeGrup}
             </if>
-            <if test='!"".equals(codeId)'>
+            <if test='@com.dunsum.backend.common.utils.MapperUtils@isNotEmpty(codeId)'>
                 AND CODE_ID = #{codeId}
             </if>
             <if test='"Y".equals(useYn)'>
@@ -31,11 +31,34 @@
             <if test='"Y".equals(dispYn)'>
                 AND DISP_YN = 'Y'
             </if>
-            <if test='!"".equals(prntGrup)'>
+            <if test='@com.dunsum.backend.common.utils.MapperUtils@isNotEmpty(prntGrup)'>
                 AND PRNT_GRUP = #{prntGrup}
             </if>
-            <if test='!"".equals(prntId)'>
+            <if test='@com.dunsum.backend.common.utils.MapperUtils@isNotEmpty(prntId)'>
                 AND PRNT_ID = #{prntId}
+            </if>
+        </where>
+        ORDER BY DISP_ODER
+    </select>
+
+    <select id="selCode" resultType="com.dunsum.backend.domains.entity.CodeEntity" parameterType="java.util.List">
+        /* CommDao.selCode - javayaji */
+        SELECT CODE_INI
+        , CODE_INI_NAME
+        , CODE_ID
+        , CODE_ID_NAME
+        , PRNT_INI
+        , PRNT_ID
+        , USE_YN
+        , DISP_YN
+        , DISP_ODER
+        , CODE_DESC
+        , DATE_FORMAT(RGST_DATE, '%Y/%m/%d %H:%i') RGST_DATE
+        , RGST_USER_NO
+        FROM JV_CODE
+        <where>
+            <if test='@com.dunsum.backend.common.utils.MapperUtils@isNotEmpty(codeInis)'>
+                AND CODE_INI IN <foreach collection="codeInis" item="item" separator=", " open="(" close=")">#{item}</foreach>
             </if>
         </where>
         ORDER BY DISP_ODER

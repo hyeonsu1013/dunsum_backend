@@ -54,6 +54,7 @@ DUNSUM
 * DunsumUrlUtils
 * RandomUtils
 * ModelUtils
+* MapperUtils
 * RestUtils
   * DnfApis
 

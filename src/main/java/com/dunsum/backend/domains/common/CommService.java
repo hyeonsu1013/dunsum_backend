@@ -21,6 +21,11 @@ public class CommService {
         return commDao.selCode(entt);
     }
 
+    // 코드 조회
+    public List<CodeEntity> selCode(List<String> codeInis) throws Exception {
+        return commDao.selCode(codeInis);
+    }
+
     // 코드 등록
     public int insCode(List<CodeEntity> list) throws Exception {
         return commDao.insCode(list);

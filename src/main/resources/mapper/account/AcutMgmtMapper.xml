@@ -20,7 +20,7 @@
             <if test='userNo > 0'>
                 AND USER_NO = ${userNo}
             </if>
-            <if test='@com.dunsum.backend.common.utils.DunsumStringUtils@isNotBlank(clntIp)'>
+            <if test='@com.dunsum.backend.common.utils.MapperUtils@isNotEmpty(clntIp)'>
                 AND CLNT_IP = #{clntIp}
             </if>
     </select>
@@ -64,7 +64,7 @@
         <if test='userNo > 0'>
             AND U.USER_NO = ${userNo}
         </if>
-        <if test='@com.dunsum.backend.common.utils.DunsumStringUtils@isNotBlank(lginId)'>
+        <if test='@com.dunsum.backend.common.utils.MapperUtils@isNotEmpty(lginId)'>
             AND U.LGIN_ID = #{lginId}
         </if>
     </select>

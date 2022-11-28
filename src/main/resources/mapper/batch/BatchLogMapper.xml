@@ -35,16 +35,16 @@
         /* BatchLogDao.updBachLog - javayaji */
         UPDATE JV_BACH_LOG
            SET MSG = #{msg}
-            <if test='edDate != null and !"".equals(edDate)'>
+            <if test='@com.dunsum.backend.common.utils.MapperUtils@isNotEmpty(edDate)'>
                 , ED_DATE = #{edDate}
             </if>
-            <if test='errDate != null and !"".equals(errDate)'>
+            <if test='@com.dunsum.backend.common.utils.MapperUtils@isNotEmpty(errDate)'>
                 , ERR_DATE = #{errDate}
             </if>
-            <if test='runTime != null and !"".equals(runTime)'>
+            <if test='@com.dunsum.backend.common.utils.MapperUtils@isNotEmpty(runTime)'>
                 , RUN_TIME = #{runTime}
             </if>
-            <if test='subMsg != null and !"".equals(subMsg)'>
+            <if test='@com.dunsum.backend.common.utils.MapperUtils@isNotEmpty(subMsg)'>
                 , SUB_MSG = #{subMsg}
             </if>
          WHERE BACH_SEQ = #{bachSeq}
