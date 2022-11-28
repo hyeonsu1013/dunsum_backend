@@ -119,20 +119,21 @@ public class DnfSrvrServiceImpl implements DnfSrvrService {
 
         mpngTrgtList.forEach(System.out::println);
 
-        rtn.put("INS", list.size());
+        rtn.put("INS_CODE", list.size());
+        rtn.put("INS_MPNG", mpngTrgtList.size());
 
         if(DunsumObjectUtils.isNotBlank(list)){
             commService.insCode(list);
 
             int delCnt = commService.delLogicCode(list);
-            rtn.put("DEL", delCnt);
+            rtn.put("DEL_CODE", delCnt);
         }
 
         if(DunsumObjectUtils.isNotBlank(mpngTrgtList)){
-//            commService.insCodeMpng(mpngTrgtList);
-//
-//            int delCnt = commService.delLogicCodeMpng(mpngTrgtList);
-//            rtn.put("DEL", delCnt);
+            commService.insCodeMpng(mpngTrgtList);
+
+            int delCnt = commService.delLogicCodeMpng(mpngTrgtList);
+            rtn.put("DEL_MPNG", delCnt);
         }
 
         return rtn;

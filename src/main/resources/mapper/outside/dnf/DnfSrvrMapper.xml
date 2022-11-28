@@ -55,6 +55,4 @@
                 #{item.serverId}
             </foreach>
     </update>
-
-
 </mapper>

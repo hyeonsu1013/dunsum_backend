@@ -87,12 +87,69 @@
     </insert>
 
     <update id="delLogicCode" parameterType="java.util.List">
+        /* CommDao.delLogicCode - javayaji */
         UPDATE JV_CODE C
         SET C.USE_YN = 'N'
         , C.DISP_YN = 'N'
         WHERE (C.CODE_INI, C.CODE_ID) NOT IN
         <foreach collection="list" item="item" open="(" close=")" separator=",">
             (#{item.codeIni}, #{item.codeId})
+        </foreach>
+    </update>
+
+    <select id="selCodeMpng" resultType="com.dunsum.backend.domains.entity.CodeMpngEntity" parameterType="com.dunsum.backend.domains.entity.CodeMpngEntity">
+        /* CommDao.selCodeMpng - javayaji */
+        SELECT *
+        FROM JV_CODE_MPNG
+    </select>
+
+    <insert id="insCodeMpng" parameterType="java.util.List">
+        /* CommDao.insCodeMpng - javayaji */
+        INSERT INTO JV_CODE_MPNG (
+        MPNG_INI
+        , MPNG_INI_NAME
+        , MPNG_GRUP
+        , MPNG_GRUP_NAME
+        , MPNG_ID
+        , MPNG_ID_NAME
+        , MPNG_VAL
+        , MPNG_VAL_NAME
+        , USE_YN
+        , DISP_YN
+        , DISP_ODER
+        , MPNG_DESC
+        , RGST_DATE
+        , RGST_USER_NO
+        )
+        VALUES
+        <foreach collection="list" item="item" separator=", ">
+            (
+            #{item.mpngIni}
+            , #{item.mpngIniName}
+            , #{item.mpngGrup}
+            , #{item.mpngGrupName}
+            , #{item.mpngId}
+            , #{item.mpngIdName}
+            , #{item.mpngVal}
+            , #{item.mpngValName}
+            , IFNULL(#{item.useYn}, 'Y')
+            , IFNULL(#{item.dispYn}, 'Y')
+            , #{item.dispOder}
+            , #{item.mpngDesc}
+            , NOW()
+            , #{item.rgstUserNo}
+            )
+        </foreach>
+    </insert>
+
+    <update id="delLogicCodeMpng" parameterType="java.util.List">
+        /* CommDao.delLogicCodeMpng - javayaji */
+        UPDATE JV_CODE_MPNG C
+        SET C.USE_YN = 'N'
+        , C.DISP_YN = 'N'
+        WHERE (C.MPNG_INI, C.MPNG_GRUP, C.MPNG_ID, C.MPNG_VAL) NOT IN
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            (#{item.mpngIni}, #{item.mpngGrup}, #{item.mpngId}, #{item.mpngVal})
         </foreach>
     </update>
 </mapper>
