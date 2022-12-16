@@ -37,10 +37,13 @@ public class ControllerAuthAspect {
         HttpServletRequest request = servletContainer.getRequest();
 
         AuthUserDetail authUserDetail = commonService.getAuthUserDetail(request);
+        String uri = request.getRequestURI();
+
+        // 유입 로그 기록
+
+
 
         for (Object arg: joinPoint.getArgs()) {
-            String uri = request.getRequestURI();
-
             if (arg instanceof BaseVO) {
                 BaseVO baseVo = (BaseVO) arg;
                 if(DunsumStringUtils.isNotBlank(uri)){

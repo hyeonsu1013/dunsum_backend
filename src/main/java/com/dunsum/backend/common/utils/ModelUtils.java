@@ -43,10 +43,8 @@ public class ModelUtils {
 
         switch (dbDataType) {
             case "int":
-                dataType = "long";
-                break;
             case "bigint":
-                dataType = "BigInteger";
+                dataType = "long";
                 break;
             case "tinyint":
             case "smallint":
