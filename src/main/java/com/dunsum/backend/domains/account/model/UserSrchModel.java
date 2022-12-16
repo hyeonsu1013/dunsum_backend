@@ -33,7 +33,7 @@ public class UserSrchModel extends SrchVO {
     @ApiModelProperty(value = "게스트 SEQ")
     private long gustSeq;
 
-    @ApiModelProperty(value = "접속 IP")
-    private String clntIp;
+    @ApiModelProperty(value = "접근 IP")
+    private String acptIp;
 
 }

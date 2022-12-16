@@ -26,7 +26,7 @@ public class AcutMgmtServiceImpl implements AcutMgmtService {
     public TokenUserModel insGust(UserGustEntity entt) throws Exception {
         UserEntity rtnUser = null;
         UserSrchModel srchModel = new UserSrchModel();
-        srchModel.setClntIp(entt.getClntIp());
+        srchModel.setAcptIp(entt.getAcptIp());
 
         // 접속 IP로 조회
         UserGustEntity orgUserGust = acutMgmtDao.getUserGust(srchModel);
@@ -70,7 +70,7 @@ public class AcutMgmtServiceImpl implements AcutMgmtService {
         if(tokenUserModel != null){
             String userToken = jwtProvider.generateAccessToken(tokenUserModel);
             tokenUserModel.setUserToken(userToken);
-            tokenUserModel.setClntIp(entt.getClntIp());
+            tokenUserModel.setClntIp(entt.getAcptIp());
         }
 
         return tokenUserModel;

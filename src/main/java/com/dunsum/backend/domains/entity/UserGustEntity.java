@@ -17,8 +17,8 @@ public class UserGustEntity extends BaseVO {
     @ApiModelProperty(value = "사용인번호")
     private long userNo;
 
-    @ApiModelProperty(value = "접속 IP")
-    private String clntIp;
+    @ApiModelProperty(value = "접근 IP")
+    private String acptIp;
 
     @ApiModelProperty(value = "DB상태")
     private String dbStat;
