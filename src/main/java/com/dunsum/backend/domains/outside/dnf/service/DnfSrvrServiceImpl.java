@@ -143,18 +143,19 @@ public class DnfSrvrServiceImpl implements DnfSrvrService {
         String CODE_INI_NAME = "DNF 직업";
 
         if(DunsumStringUtils.isNotBlank(job.getJobId())){
-            CodeEntity code = new CodeEntity();
-            code.setCodeIni(CODE_INI);
-            code.setCodeIniName(CODE_INI_NAME);
-            code.setCodeId(job.getJobId());
-            code.setCodeIdName(job.getJobName());
+            CodeEntity code = CodeEntity.builder()
+                                .codeIni(CODE_INI)
+                        .codeIniName(CODE_INI_NAME)
+                        .codeId(job.getJobId())
+                        .codeIdName(job.getJobName())
+                        .build();
             code.setRgstUserNo(SystemDTO.SYS_USER_NO);
             list.add(code);
         }
 
         if(DunsumObjectUtils.isNotBlank(job.getRows())){
             job.getRows().forEach(el ->
-                this.makeJobCodeList(list, mpngTrgtList, el, job)
+                    this.makeJobCodeList(list, mpngTrgtList, el, job)
             );
         }
 
@@ -183,20 +184,19 @@ public class DnfSrvrServiceImpl implements DnfSrvrService {
             next = next.getNext();
             dispOrder = next == null ? 0 : dispOrder;
 
-            CodeMpngEntity mpng = new CodeMpngEntity();
-            mpng.setMpngIni(MPNG_INI);
-            mpng.setMpngIniName(MPNG_INI_NAME);
-            mpng.setMpngGrup(MPNG_GRUP);
-            mpng.setMpngGrupName(MPNG_GRUP_NAME);
-            mpng.setMpngId(MPNG_ID);
-            mpng.setMpngIdName(MPNG_ID_NAME);
-            mpng.setMpngVal(next == null ? "" : next.getJobGrowId());
-            mpng.setMpngValName(next == null ? "" : next.getJobGrowName());
-            mpng.setMpngDesc(String.format("%s-%s-전직", MPNG_GRUP_NAME, MPNG_ID_NAME));
-            mpng.setDispOder(dispOrder++);
-            mpng.setRgstUserNo(SystemDTO.SYS_USER_NO);
+            CodeMpngEntity mpng = CodeMpngEntity.builder()
+                                    .mpngIni(MPNG_INI)
+                                    .mpngIniName(MPNG_INI_NAME)
+                                    .mpngGrup(MPNG_GRUP)
+                                    .mpngGrupName(MPNG_GRUP_NAME)
+                                    .mpngId(MPNG_ID)
+                                    .mpngIdName(MPNG_ID_NAME)
+                                    .mpngVal(next == null ? "" : next.getJobGrowId())
+                                    .mpngValName(next == null ? "" : next.getJobGrowName())
+                                    .mpngDesc(String.format("%s-%s-전직", MPNG_GRUP_NAME, MPNG_ID_NAME))
+                                    .dispOder(dispOrder++)
+                                    .build();
             list.add(mpng);
-
         } while (next != null);
 
         return list;

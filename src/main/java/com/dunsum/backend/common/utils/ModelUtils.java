@@ -126,8 +126,7 @@ public class ModelUtils {
         importList.add("import com.dunsum.backend.common.vo.BaseVO;");
         importList.add("import io.swagger.annotations.ApiModel;");
         importList.add("import io.swagger.annotations.ApiModelProperty;");
-        importList.add("import lombok.Data;");
-        importList.add("import lombok.EqualsAndHashCode;");
+        importList.add("import lombok.*;");
 
 //        if(hasTimestamp){
 //            importList.add("\r\nimport java.sql.Timestamp;");
@@ -145,18 +144,17 @@ public class ModelUtils {
         sb.append(String.join("\r\n", importList));
         sb.append("\r\n\r\n");
 
-        sb.append("@Data");
-        sb.append("\r\n");
-        sb.append("@EqualsAndHashCode(callSuper=false)");
-        sb.append("\r\n");
+        sb.append("@Data\r\n");
+        sb.append("@Builder\r\n");
+        sb.append("@NoArgsConstructor\r\n");
+        sb.append("@AllArgsConstructor\r\n");
+        sb.append("@EqualsAndHashCode(callSuper=false)\r\n");
         sb.append("@ApiModel(description = \"");
         sb.append(tVO.getTableComment());
-        sb.append("\")");
-        sb.append("\r\n");
+        sb.append("\")\r\n");
         sb.append("public class ");
         sb.append(DunsumStringUtils.getCamelStr(DunsumStringUtils.RemovePrefix(tVO.getTableName(), tablePrefix), true));
-        sb.append("Entity extends BaseVO {");
-        sb.append("\r\n\r\n");
+        sb.append("Entity extends BaseVO {\r\n\r\n");
 
         // Field 생성
         for(ColumnVO cVO : sortColList) {
@@ -165,14 +163,12 @@ public class ModelUtils {
 
             sb.append("    @ApiModelProperty(value = \"");
             sb.append(cVO.getColumnComment());
-            sb.append("\")");
-            sb.append("\r\n");
+            sb.append("\")\r\n");
             sb.append("    private ");
             sb.append(getDataType(cVO.getDataType()));
             sb.append(' ');
             sb.append(DunsumStringUtils.getCamelStr(cVO.getColumnName(), false));
-            sb.append(';');
-            sb.append("\r\n\r\n");
+            sb.append(";\r\n\r\n");
         }
 
         sb.append("}");

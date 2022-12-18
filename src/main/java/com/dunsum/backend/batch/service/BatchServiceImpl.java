@@ -92,12 +92,13 @@ public class BatchServiceImpl implements BatchService {
         long rgstUserNo = this.getUserNo(isBatch);
         Timestamp timestamp = new Timestamp(stTime);
 
-        BachLogEntity logBatch = new BachLogEntity();
-        logBatch.setMsg(msg);
-        logBatch.setStDate(SMPL_DATE_FORM.format(timestamp));
+        BachLogEntity logBatch = BachLogEntity.builder()
+                                    .msg(msg)
+                                    .stDate(SMPL_DATE_FORM.format(timestamp))
+                                    .bachMgmtId(logMgmtSeq)
+                                    .runType(BatchMgmtFactory.getRunType(isBatch))
+                                    .build();
         logBatch.setRgstUserNo(rgstUserNo);
-        logBatch.setBachMgmtId(logMgmtSeq);
-        logBatch.setRunType(BatchMgmtFactory.getRunType(isBatch));
 
         batchLogDao.insBachLog(logBatch);
         return logBatch;
