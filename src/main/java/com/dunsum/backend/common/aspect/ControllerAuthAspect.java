@@ -3,9 +3,11 @@ package com.dunsum.backend.common.aspect;
 import com.dunsum.backend.common.dto.SystemDTO;
 import com.dunsum.backend.common.security.model.AuthUserDetail;
 import com.dunsum.backend.common.service.CommonService;
+import com.dunsum.backend.common.utils.ClientUtils;
 import com.dunsum.backend.common.utils.DunsumStringUtils;
 import com.dunsum.backend.common.vo.BaseVO;
 import com.dunsum.backend.common.vo.environment.AppOutsideVO;
+import com.dunsum.backend.domains.entity.SstmLogEntity;
 import com.dunsum.backend.domains.outside.model.OtsdModel;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.JoinPoint;
@@ -40,8 +42,11 @@ public class ControllerAuthAspect {
         String uri = request.getRequestURI();
 
         // 유입 로그 기록
-
-
+        SstmLogEntity log = SstmLogEntity.builder()
+                            .userAgnt(ClientUtils.getUserAgent(request))
+                            .acptUrl(uri)
+                            .acptIp(ClientUtils.getClientIP(request))
+                            .build();
 
         for (Object arg: joinPoint.getArgs()) {
             if (arg instanceof BaseVO) {

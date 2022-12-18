@@ -48,9 +48,10 @@ public class AcutMgmtServiceImpl implements AcutMgmtService {
                 userEntt = acutMgmtDao.getUser(srchModel);
             } while (userEntt != null);
 
-            UserEntity userInsEntt = new UserEntity();
-            userInsEntt.setGustYn(AccountDataModel.GUEST_O);
-            userInsEntt.setLginId(guestId);
+            UserEntity userInsEntt = UserEntity.builder()
+                                    .gustYn(AccountDataModel.GUEST_O)
+                                    .lginId(guestId)
+                                    .build();
 
             // User 등록
             acutMgmtDao.insUser(userInsEntt);
